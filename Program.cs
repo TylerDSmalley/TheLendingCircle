@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Data;
+using TheLendingCircle.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Set to true if we implement email confirmation
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
@@ -74,12 +75,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<IdentityUser>>();
+var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<ApplicationUser>>();
 var roleManager = builder.Services.BuildServiceProvider().GetService<RoleManager<IdentityRole>>();
 
-SeedUsersAndRoles(userManager, roleManager);
+//SeedUsersAndRoles(userManager, roleManager);
 
-void SeedUsersAndRoles(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager) {
+void SeedUsersAndRoles(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) {
     string[] roleNamesList = new string[] { "User", "Admin" };
     foreach (string roleName in roleNamesList) {
         if(!roleManager.RoleExistsAsync(roleName).Result) {
@@ -92,7 +93,7 @@ void SeedUsersAndRoles(UserManager<IdentityUser> userManager, RoleManager<Identi
     string adminEmail = "admin@admin.com";
     string adminPass = "Password1";
     if (userManager.FindByNameAsync(adminEmail).Result == null) {
-        IdentityUser user = new IdentityUser();
+        ApplicationUser user = new ApplicationUser();
         user.UserName = adminEmail;
         user.Email = adminEmail;
         user.EmailConfirmed = true;

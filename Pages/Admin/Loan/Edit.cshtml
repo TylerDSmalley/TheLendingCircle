@@ -1,0 +1,50 @@
+@page
+@model TheLendingCircle.Pages_Admin_Loan.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Loan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Loan.Id" />
+            <div class="form-group">
+                <label asp-for="Loan.CreationTime" class="control-label"></label>
+                <input asp-for="Loan.CreationTime" class="form-control" />
+                <span asp-validation-for="Loan.CreationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.DueDate" class="control-label"></label>
+                <input asp-for="Loan.DueDate" class="form-control" />
+                <span asp-validation-for="Loan.DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Loan.HasBeenViewed" /> @Html.DisplayNameFor(model => model.Loan.HasBeenViewed)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.Status" class="control-label"></label>
+                <input asp-for="Loan.Status" class="form-control" />
+                <span asp-validation-for="Loan.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
