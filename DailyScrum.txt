@@ -1,0 +1,37 @@
+1. What I have done / not done since last Scrum
+2. What I plan to do from this scrum to the next
+3. Where do I need assistance? What do I need to figure out?
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-02 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+-N/A
+
+2. What I plan to do from this scrum to the next
+-add TODO to story cards in trello
+-add Models/entitites
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+-N/A
+
+2. What I plan to do from this scrum to the next
+-refresh AWS elastic beanstock potential option for hosting
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Phil--
+1. What I have done / not done since last Scrum
+-N/A
+
+2. What I plan to do from this scrum to the next
+-Start on initial layout for Index
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
