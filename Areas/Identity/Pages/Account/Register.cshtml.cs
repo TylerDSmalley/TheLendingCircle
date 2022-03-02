@@ -122,7 +122,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
                     //Adds default role User to new user
-                    var result2 = await userManager.AddToRoleAsync(user, "User");
+                    var result2 = await _userManager.AddToRoleAsync(user, "User");
                     if (result2.Succeeded){
                         _logger.LogInformation($"User {Input.Email} was given role = User");
                     } else {
