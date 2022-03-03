@@ -1,10 +1,27 @@
 ﻿@page
 @model IndexModel
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Home page";
 }
+<div class="container">
+    <div class="input-group my-3">
+        <input type="text" class="form-control" placeholder="Search for an item">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="row row-gap-2 row-cols-2 row-cols-md-3 row-cols-lg-5">
+    @for (int i = 0; i < 6; i++)
+    {
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
+                        <img class="p-0 container-fluid mb-2" src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
+                        <h5>Item Name</h5>
+                        <h6 class="text-secondary"><b>$99.99</b></h6>
+                    </div>
+                </div>
+    }
+    </div>
 </div>
