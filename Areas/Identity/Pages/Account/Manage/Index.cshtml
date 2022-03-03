@@ -1,0 +1,106 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="container-xl px-4 mt-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2"
+                        src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form id="registerForm" method="post"
+                        class="w-100 row g-4 needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating  col-md-4">
+                            <input asp-for="Input.FirstName" class="form-control" autocomplete="First Name"
+                                aria-required="true" value="@Model.CurrentUser.FirstName" />
+                            <label asp-for="Input.FirstName" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating  col-md-4">
+                            <input asp-for="Input.LastName" class="form-control" autocomplete="Last Name"
+                                aria-required="true" value="@Model.CurrentUser.LastName" />
+                            <label asp-for="Input.LastName" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating  col-4">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username"
+                                aria-required="true" value="@Model.CurrentUser.Email" />
+                            <label asp-for="Input.Email" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating  col-12">
+                            <input asp-for="Input.Address" class="form-control" autocomplete="address"
+                                aria-required="true" value="@Model.CurrentUser.Address" />
+                            <label asp-for="Input.Address" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating  col-md-6">
+                            <input asp-for="Input.City" class="form-control" autocomplete="address"
+                                aria-required="true" value="@Model.CurrentUser.City" />
+                            <label asp-for="Input.City" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating  col-md-2">
+                            <select asp-for="Input.Province" class="form-select" value="@Model.CurrentUser.Province">
+                                <option value="NL">NL</option>
+                                <option value="PE">PE</option>
+                                <option value="NS">NS</option>
+                                <option value="NB">NB</option>
+                                <option value="QC">QC</option>
+                                <option value="ON">ON</option>
+                                <option value="MB">MB</option>
+                                <option value="SK">SK</option>
+                                <option value="AB">AB</option>
+                                <option value="BC">BC</option>
+                                <option value="YT">YT</option>
+                                <option value="NT">NT</option>
+                                <option value="NU">NU</option>
+                            </select>
+                            <label asp-for="Input.Province" class="form-label fst-italic ms-1" class="form-label"></label>
+                        </div>
+                        <div class="form-floating  col-md-4">
+                            <input asp-for="Input.PostalCode" class="form-control" autocomplete="address"
+                                aria-required="true" value="@Model.CurrentUser.PostalCode"/>
+                            <label asp-for="Input.PostalCode" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="Input.UserPhotoPath" class="form-control" autocomplete="Placeholder"
+                                aria-required="true" hidden="true" value="UserPhotoPath" />
+                            <span asp-validation-for="Input.UserPhotoPath" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <button id="registerSubmit" type="submit"
+                                class="w-100 btn btn-lg btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
