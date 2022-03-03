@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Set to true if we implement email confirmation
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
@@ -90,11 +90,13 @@ app.UseAuthorization();
 var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<ApplicationUser>>();
 var roleManager = builder.Services.BuildServiceProvider().GetService<RoleManager<IdentityRole>>();
 
-//SeedUsersAndRoles(userManager, roleManager);
+SeedUsersAndRoles(userManager, roleManager);
 
 void SeedUsersAndRoles(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) {
     string[] roleNamesList = new string[] { "User", "Admin" };
     foreach (string roleName in roleNamesList) {
+
+        //FIX ME: Function throws NullReference here!!
         if(!roleManager.RoleExistsAsync(roleName).Result) {
             IdentityRole role = new IdentityRole();
             role.Name = roleName;
@@ -106,9 +108,17 @@ void SeedUsersAndRoles(UserManager<ApplicationUser> userManager, RoleManager<Ide
     string adminPass = "Password1";
     if (userManager.FindByNameAsync(adminEmail).Result == null) {
         ApplicationUser user = new ApplicationUser();
+        user.FirstName = "John";
+        user.LastName = "Smith";
+        user.Address = "123 Rue Peel";
+        user.PostalCode = "H2K 2H2";
+        user.City = "Montreal";
+        user.Province = "Quebec";
+        user.UserPhotoPath = "No Photo";
         user.UserName = adminEmail;
         user.Email = adminEmail;
         user.EmailConfirmed = true;
+
         IdentityResult result = userManager.CreateAsync(user, adminPass).Result;
         
         if (result.Succeeded) {
