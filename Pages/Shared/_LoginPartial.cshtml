@@ -7,11 +7,6 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello
-                @User.Identity?.Name!</a>
-        </li>
-
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -19,17 +14,17 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
-                <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a></li>
+                <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a></li>
                 <hr />
-                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Item">Item List</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Loan">Loan List</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Request">Request List</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Review">Review List</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/User">User List</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Item/Index">Item List</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Loan/Index">Loan List</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Request/Index">Request List</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Review/Index">Review List</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-page="/Admin/User/Index">User List</a></li>
                 <hr />
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                    asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    asp-route-returnUrl='@Url.Page("/", new { area = "" })' method="post">
                         <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                     </form>
                 </li>
