@@ -46,54 +46,54 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account
             _emailSender = emailSender;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Required, StringLength(100, MinimumLength = 1, ErrorMessage = "First Name must be between 1 and 100 characters")]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required, StringLength(100, MinimumLength = 1, ErrorMessage = "Last Name must be between 1 and 100 characters")]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Required, StringLength(100, MinimumLength = 1, ErrorMessage = "Address must be between 1 and 100 characters")]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Required, StringLength(10, MinimumLength = 1, ErrorMessage = "Postal Code must be between 1 and 100 characters")]
+            [Display(Name = "Postal Code")]
+            public string PostalCode { get; set; }
+
+            [Required, StringLength(100, MinimumLength = 1, ErrorMessage = "City must be between 1 and 100 characters")]
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+            [Required, StringLength(100, MinimumLength = 1, ErrorMessage = "Province must be between 1 and 100 characters")]
+            [Display(Name = "Province")]
+            public string Province { get; set; }
+
+            [Required, StringLength(500, MinimumLength = 1, ErrorMessage = "ItemPhotoPath must be between 1 and 500 characters")]
+            [Display(Name = "ItemPhotoPath")]
+            public string UserPhotoPath { get; set; }
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -114,9 +114,16 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+                user.PostalCode = Input.PostalCode;
+                user.City = Input.City;
+                user.Province = Input.Province;
+                user.UserPhotoPath = Input.UserPhotoPath;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -124,9 +131,12 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
                     //Adds default role User to new user
                     var result2 = await _userManager.AddToRoleAsync(user, "User");
-                    if (result2.Succeeded){
+                    if (result2.Succeeded)
+                    {
                         _logger.LogInformation($"User {Input.Email} was given role = User");
-                    } else {
+                    }
+                    else
+                    {
                         _logger.LogInformation($"User {Input.Email} was not given role");
                     }
 

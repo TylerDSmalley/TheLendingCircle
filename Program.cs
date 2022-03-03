@@ -18,7 +18,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Set to true if we implement email confirmation
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddDefaultUI();
 builder.Services.AddRazorPages();
 
 //Switch between local sqlite for dev and SqlServer for production
@@ -90,7 +92,9 @@ app.UseAuthorization();
 var userManager = builder.Services.BuildServiceProvider().GetService<UserManager<ApplicationUser>>();
 var roleManager = builder.Services.BuildServiceProvider().GetService<RoleManager<IdentityRole>>();
 
-SeedUsersAndRoles(userManager, roleManager);
+if(userManager != null && roleManager != null) {
+    SeedUsersAndRoles(userManager, roleManager);
+}
 
 void SeedUsersAndRoles(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) {
     string[] roleNamesList = new string[] { "User", "Admin" };
