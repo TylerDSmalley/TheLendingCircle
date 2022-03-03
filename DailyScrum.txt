@@ -35,3 +35,45 @@ N/A
 
 3. Where do I need assistance? What do I need to figure out?
 N/A
+
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-03 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+-Added the entities are mapped and built. 
+-Added Admin CRUD pages have been built (still need styling and tweaking - i.e. User table is massive)
+-Added custom fields to IdentityUser so our project specific fields have been added to the AspUsers table
+-Added switch in program.CS so we can use a local sqlite  DB for development, an a SqlServer DB when we're ready to test on the hosted site.
+
+2. What I plan to do from this scrum to the next
+- Update user registration form to contain new user fields
+- Update user profile to reflect new user fields
+- Start on add Item form
+- Do some Trello ToDos
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- Set up AWS - RDS, S3
+
+2. What I plan to do from this scrum to the next
+- establish DB and connect
+- start on public profile view
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Phil--
+1. What I have done / not done since last Scrum
+-Started on initial layout for Index
+
+2. What I plan to do from this scrum to the next
+- Start building Item view
+- time permitting, start request item
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
