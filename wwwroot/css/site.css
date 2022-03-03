@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.roundedcorners {
+  border-radius: 1.2em;
+}
+
+.row-gap-2 {
+  row-gap: 2em;
+}
