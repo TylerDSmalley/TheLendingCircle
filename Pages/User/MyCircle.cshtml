@@ -1,0 +1,79 @@
+﻿@page
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+}
+@model TheLendingCircle.Pages.User.MyCircleModel
+@{
+}
+
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
+
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">Full Name Placeholder</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Edit Profile</a>
+                </div>
+            </div>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item"><a href="#profile-friends" class="nav-link active show" data-toggle="tab">MY ITEMS</a></li>
+                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">ITEMS LOANED</a></li>
+                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">ITEMS BORROWED</a></li>
+                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="profile-container">
+            <div class="row row-space-20">
+                <div class="col-md-8">
+                    <div class="tab-content p-0">
+
+                        <div class="tab-pane fade active show" id="profile-friends">
+                            <div class="m-b-10"><b>My Items</b></div>
+
+                            <ul class="friend-list clearfix">
+                                <li>
+                                    Item Photo
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 hidden-xs hidden-sm">
+                    <ul class="profile-info-list">
+                        <li class="title">ITEM INFORMATION</li>
+                        <li>
+                            <div class="field">Id:</div>
+                            <div class="value">Placeholder</div>
+                        </li>
+                        <li>
+                            <div class="field">Title:</div>
+                            <div class="value">Placeholder</div>
+                        </li>
+                        <li>
+                            <div class="field">Description:</div>
+                            <div class="value">Placeholder</div>
+                        </li>
+                        <li>
+                            <div class="field">Condition:</div>
+                            <div class="value">Placeholder</div>
+                        </li>
+                        <li>
+                            <div class="field">Available:</div>
+                            <div class="value">Placeholder</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
