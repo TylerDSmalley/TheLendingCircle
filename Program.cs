@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 //Local DB version
 builder.Services.AddDbContext<ApplicationDbContext>();
 //Hosted DB version
