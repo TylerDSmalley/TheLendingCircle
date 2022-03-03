@@ -1,4 +1,8 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @section Styles {
 <link rel="stylesheet" href="~/css/MyCircle.css" />
 }
@@ -42,6 +46,9 @@
                                 <li>
                                     Item Photo
                                 </li>
+                                <li>
+                                    Probably will put carousel
+                                </li>
                                 
                             </ul>
                         </div>
@@ -70,6 +77,10 @@
                         <li>
                             <div class="field">Available:</div>
                             <div class="value">Placeholder</div>
+                        </li>
+                        <li>
+                            </hr>
+                            <a class="btn btn-xs btn-primary mb-2" asp-area="" asp-page="">Add Item</a>
                         </li>
                     </ul>
                 </div>
