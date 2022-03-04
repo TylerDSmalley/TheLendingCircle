@@ -11,6 +11,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     
     public DbSet<Item> Items { get; set; }
     public DbSet<Loan> Loans { get; set; }
+    public DbSet<Request> Requests { get; set; }
+    public DbSet<Review> Reviews { get; set; }
     public override DbSet<ApplicationUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)

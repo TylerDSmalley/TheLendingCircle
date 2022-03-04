@@ -71,7 +71,7 @@ body{
     overflow: hidden;
 }
 .profile-header .profile-header-cover {
-    background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
+    background-color: #007aff;
     background-size: 100% auto;
     position: absolute;
     left: 0;
@@ -119,6 +119,9 @@ body .fc-icon {
 .profile-header .profile-header-tab > li.active > a,
 .profile-header .profile-header-tab > li > a.active {
     color: #007aff;
+    border-top: lightgray solid thin;
+    border-left: lightgray solid thin;
+    border-right: lightgray solid thin;
 }
 .profile-header .profile-header-content:after,
 .profile-header .profile-header-content:before {

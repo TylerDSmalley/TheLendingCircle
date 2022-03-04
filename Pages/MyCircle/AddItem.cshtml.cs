@@ -7,8 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace TheLendingCircle.Pages.User
+namespace TheLendingCircle.Pages.MyCircle
 {
+    [Authorize]
     public class AddItemModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;

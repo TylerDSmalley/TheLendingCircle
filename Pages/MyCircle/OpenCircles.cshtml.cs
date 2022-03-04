@@ -5,16 +5,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
 
-namespace TheLendingCircle.Pages.User
+namespace TheLendingCircle.Pages.MyCircle
 {
     [Authorize]
-    public class MyCircleModel : PageModel
+    public class OpenCirclesModel : PageModel
     {
-
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;
 
-        public MyCircleModel(UserManager<ApplicationUser> userManager,
+        public OpenCirclesModel(UserManager<ApplicationUser> userManager,
             TheLendingCircle.Data.ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -23,11 +22,12 @@ namespace TheLendingCircle.Pages.User
 
         public ApplicationUser CurrentUser { get; set; }
 
-        public List<Item> UserItems { get; set; }
-
+        public List<Loan> LoanedItems { get; set; }
+        public List<Loan> BorrowedItems { get; set; }
         private async Task LoadAsync(string id)
         {
-            UserItems = await _context.Items.Where(i => i.Owner.Id == id).ToListAsync();
+            LoanedItems = await _context.Loans.Where(l => l.Owner.Id == id && l.Status == "open").ToListAsync();
+            BorrowedItems = await _context.Loans.Where(l => l.Borrower.Id == id && l.Status == "open").ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()

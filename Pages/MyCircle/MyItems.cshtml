@@ -6,7 +6,7 @@
 @section Styles {
 <link rel="stylesheet" href="~/css/MyCircle.css" />
 }
-@model TheLendingCircle.Pages.User.MyCircleModel
+@model TheLendingCircle.Pages.MyCircle.MyItems.MyItemsModel
 @{
 }
 
@@ -28,18 +28,23 @@
             </div>
 
             <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="#profile-friends" class="nav-link active show" data-toggle="tab">MY
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link active show" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">ITEMS LOANED</a></li>
-                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">ITEMS BORROWED</a></li>
-                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a></li>
-                <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
-                <li class="nav-item"><a class="btn btn-xs btn-primary mb-2" asp-area="" asp-page="./AddItem">Add
-                        Item</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
 
         <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-row align-items-center mb-0 mt-2">
+                <h2 class="mb-0">My Items in Circulation</h2>
+            <p class="ms-3 mb-0">
+                <a class="btn btn-xs btn-primary my-2" asp-area="" asp-page="./AddItem">Add Item</a>
+            </p>
+            </div>
+            <hr/>
 
             @foreach (var item in Model.UserItems)
             {

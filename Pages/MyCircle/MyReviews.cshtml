@@ -1,0 +1,79 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+}
+@model TheLendingCircle.Pages.MyCircle.MyReviews.MyReviewsModel
+@{
+}
+
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover" style="background-color: lightpink;"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
+
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index"
+                        title="Manage">Edit Profile</a>
+                </div>
+            </div>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
+                        ITEMS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link active show" style="color: lightpink;" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <h2 class="mt-2">My Circle Reputation</h2>
+            <hr/>
+
+            
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="Container d-flex flex-row justify-content-evenly my-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Review by: <a class="nav-item" asp-area="" asp-route-id="@review.Borrower.Id" asp-page="#../Users/UserProfile">@review.Owner.Email</a>
+                        </div>
+                            <ul class="profile-info-list">
+                                <li class="title">Review Details</li>
+                                <li>
+                                    <div class="field">Loaner Submitted Review:</div>
+                                    <div class="value">@review.ReviewBody</div>
+                                </li>
+                                <li>
+                                    <div class="field">Rating given:</div>
+                                    <div class="value">@review.Rating</div>
+                                </li>
+                                <li>
+                                    <div class="field">Reviewer:</div>
+                                    <div class="value">
+                                        @review.Owner.FirstName @review.Owner.LastName
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-footer text-muted">
+                                Date Reviewed: @review.CreationTime
+                            </div>
+                    </div>
+                </div>
+                <hr/>
+            }
+        </div>
+    </div>
+</div>
+
