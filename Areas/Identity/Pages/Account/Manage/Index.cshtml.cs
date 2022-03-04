@@ -77,7 +77,6 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             CurrentUser = user;
         }
 
