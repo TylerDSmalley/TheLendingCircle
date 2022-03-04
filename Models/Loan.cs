@@ -29,13 +29,12 @@ namespace TheLendingCircle.Models
         public string Status { get; set; }
 
         //Add FK connections
-        [Required]
+        
         public ApplicationUser Owner { get; set; }
 
         [Required]
         public ApplicationUser Borrower { get; set; }
 
-        [Required]
-        public Item ItemLoaned { get; set; }
+        public Item? ItemLoaned { get; set; }
     }
 }

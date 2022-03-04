@@ -25,7 +25,7 @@ namespace TheLendingCircle.Models
         public double Rating { get; set; }
 
         //Add FK connections
-        [Required]
+        
         public ApplicationUser Owner { get; set; }
 
         [Required]

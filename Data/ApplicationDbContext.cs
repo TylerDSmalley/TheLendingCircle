@@ -18,12 +18,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);
     }
 
-    //Probably can be removed once we migrate to hosted DB
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //TODO: Add SqlServer data source here
-            optionsBuilder.UseSqlite(@"Data source=TheLendingCircleDb.sqlite");
-        }
+    //Used for local DB
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     {
+    //         //TODO: Add SqlServer data source here
+    //         optionsBuilder.UseSqlServer(@"Data source=LendingCircleContext");
+    //     }
 
     //Probably can be removed once we migrate to hosted DB
     public DbSet<TheLendingCircle.Models.Request> Request { get; set; }

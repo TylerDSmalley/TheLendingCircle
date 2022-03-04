@@ -5,14 +5,11 @@ using TheLendingCircle.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Add DB services to the container.
+//var connectionString = builder.Configuration.GetConnectionString("LendingCircleContext");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("LendingCircleContext")));
 //Local DB version
-builder.Services.AddDbContext<ApplicationDbContext>();
-//Hosted DB version
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlServer(connectionString));builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Set to true if we implement email confirmation
@@ -22,17 +19,18 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultUI();
 builder.Services.AddRazorPages();
 
-//Switch between local sqlite for dev and SqlServer for production
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
-}
-else
-{
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DB_CONNECTION_STRING")));
-}
+
+// //Switch between local sqlite for dev and SqlServer for production
+// if (builder.Environment.IsDevelopment())
+// {
+//     builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//         options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
+// }
+// else
+// {
+//     builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//         options.UseSqlServer(builder.Configuration.GetConnectionString("LendingCircleContext")));
+// }
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
