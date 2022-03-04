@@ -5,11 +5,13 @@
     ViewData["Title"] = "Home page";
 }
 <div class="container">
-    <div class="input-group my-3">
-        <input type="text" class="form-control" placeholder="Search for an item">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Search</button>
-        </div>
+    <div class="input-group d-flex my-3 align-items-center">
+        <input type="text" class="rounded-pill w-100 form-control" placeholder="Search for an item">
+        <button style="position:absolute;right:12px;z-index:10;" class="rounded-circle btn" type="button">            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+        </input>
     </div>
 
     <div class="row row-gap-2 row-cols-2 row-cols-md-3 row-cols-lg-5">
@@ -17,9 +19,11 @@
     {
                 <div class="col d-flex flex-column align-items-center">
                     <div class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
-                        <img class="p-0 container-fluid mb-2" src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
+                        <img class="p-0 roundedcorners container-fluid mb-4" src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
+                        <div class="mx-1">
                         <h5>Item Name</h5>
                         <h6 class="text-secondary"><b>$99.99</b></h6>
+                        </div>
                     </div>
                 </div>
     }
