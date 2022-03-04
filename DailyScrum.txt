@@ -83,9 +83,10 @@ N/A
 --Tyler--
 1. What I have done / not done since last Scrum
 - Updated Registration form to use custom fields
+- Generated User account pages
 - Updated User Account Page to display new custom fields
 - Updated layout and styling to User Account Page
-- Updated CodeBehind to handle Account update...it also refreshes the cookies to update the user credentials of the user who is currently logged    in. 
+- Updated CodeBehind to handle Account update...it also refreshes the cookies to update the user credentials of the user who is currently logged in. 
 - Trimmed down the user table in the admin menu to only display relevant info.
 - Created the page and template for the User Items page (called it My Circle in the dropdown menu). 
 - did some neat styling to the log in and register pages. 
@@ -94,10 +95,10 @@ N/A
 - Added logic to MyCircle Page to display a list of the logged in user's items
 - Styled the page to be flexible with the dynamic content
 - Added button that links to Add Item page. 
+- Changed FK contraints to allow RDS connection
 
 2. What I plan to do from this scrum to the next
-- Start on add Item form
-- Do some Trello ToDos
+- Finish User Items
 
 
 3. Where do I need assistance? What do I need to figure out?
@@ -105,22 +106,25 @@ N/A
 
 --Ileana--
 1. What I have done / not done since last Scrum
-- Set up AWS - RDS, S3
+- established DB and connected with project
+- S3 bucket created and published
 
 2. What I plan to do from this scrum to the next
-- establish DB and connect
-- start on public profile view
+- Figure out photo upload into S3
+- Start User profile
 
 3. Where do I need assistance? What do I need to figure out?
 N/A
 
 --Phil--
 1. What I have done / not done since last Scrum
--Started on initial layout for Index
+- Set up Index page
+- Set up Item View page
 
 2. What I plan to do from this scrum to the next
-- Start building Item view
-- time permitting, start request item
+- Build search item view page
+- Build Item view page logic
+- Build index view logic
 
 
 3. Where do I need assistance? What do I need to figure out?
