@@ -1,0 +1,19 @@
+@page "{id:int}"
+@model TheLendingCircle.Pages.Items.Index
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="d-lg-flex gap-3">
+    <div style="max-width:600px" class="container">
+        <img class="p-0 container-fluid roundedcorners" src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png"
+            alt="item" />
+    </div>
+    <div class="p-4 container-fluid">
+        <h1>Item Name</h1>
+        <h3>Condition - <span class="text-success">Currently Available</span></h3>
+        <h5>Owner</h5>
+        <p>Description</p>
+        <button class="btn btn-success">Request</button>
+    </div>
+</div>

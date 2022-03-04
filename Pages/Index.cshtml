@@ -7,25 +7,39 @@
 <div class="container">
     <div class="input-group d-flex my-3 align-items-center">
         <input type="text" class="rounded-pill w-100 form-control" placeholder="Search for an item">
-        <button style="position:absolute;right:12px;z-index:10;" class="rounded-circle btn" type="button">            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        <button style="position:absolute;right:12px;z-index:10;" class="rounded-circle btn" type="button"> <svg
+                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                viewBox="0 0 16 16">
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
         </button>
         </input>
     </div>
 
-    <div class="row row-gap-2 row-cols-2 row-cols-md-3 row-cols-lg-5">
-    @for (int i = 0; i < 6; i++)
-    {
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5">
+        @for (int i = 0; i < 6; i++)
+        {
                 <div class="col d-flex flex-column align-items-center">
-                    <div class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
-                        <img class="p-0 roundedcorners container-fluid mb-4" src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
+            <a class="text-decoration-none" asp-page="/Items/Index" asp-route-id="@i">
+                    <div
+                    class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
+                        <img class="p-0 roundedcorners container-fluid mb-4"
+                        src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
                         <div class="mx-1">
-                        <h5>Item Name</h5>
-                        <h6 class="text-secondary"><b>$99.99</b></h6>
+                            <h5>Item Name</h5>
+                            <h6 class="text-secondary"><b>Condition</b></h6>
                         </div>
                     </div>
+            </a>
+                    <div class="border-light rounded-circle link-success" style="border-style:solid;border-width:10px;position: relative;bottom: 40px;right: -82px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                        class="bi bi-check-circle" viewBox="0 0 16 16">
+                            <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                    </div>
                 </div>
-    }
+        }
     </div>
 </div>
