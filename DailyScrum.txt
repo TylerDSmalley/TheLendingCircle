@@ -46,8 +46,56 @@ N/A
 -Added switch in program.CS so we can use a local sqlite  DB for development, an a SqlServer DB when we're ready to test on the hosted site.
 
 2. What I plan to do from this scrum to the next
-- Update user registration form to contain new user fields
-- Update user profile to reflect new user fields
+- DONE Update user registration form to contain new user fields
+- DONE Update user profile to reflect new user fields
+- Start on add Item form
+- Do some Trello ToDos
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- Set up AWS - RDS, S3
+
+2. What I plan to do from this scrum to the next
+- establish DB and connect
+- start on public profile view
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Phil--
+1. What I have done / not done since last Scrum
+-Started on initial layout for Index
+
+2. What I plan to do from this scrum to the next
+- Start building Item view
+- time permitting, start request item
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-04 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+- Updated Registration form to use custom fields
+- Updated User Account Page to display new custom fields
+- Updated layout and styling to User Account Page
+- Updated CodeBehind to handle Account update...it also refreshes the cookies to update the user credentials of the user who is currently logged    in. 
+- Trimmed down the user table in the admin menu to only display relevant info.
+- Created the page and template for the User Items page (called it My Circle in the dropdown menu). 
+- did some neat styling to the log in and register pages. 
+- Created Add Item Form (will style tomorrow)
+- Finished logic to handle the add
+- Added logic to MyCircle Page to display a list of the logged in user's items
+- Styled the page to be flexible with the dynamic content
+- Added button that links to Add Item page. 
+
+2. What I plan to do from this scrum to the next
 - Start on add Item form
 - Do some Trello ToDos
 
