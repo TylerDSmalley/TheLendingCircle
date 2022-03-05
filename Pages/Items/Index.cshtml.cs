@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TheLendingCircle.Models;
 using TheLendingCircle.Data;
@@ -18,7 +19,7 @@ namespace TheLendingCircle.Pages.Items
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
         public Item? CurrentItem { get; set; }
-        // public ApplicationUser? Owner {get;set;}
+        public ApplicationUser? Owner {get;set;} = new ApplicationUser();
 
         public Index(ILogger<Index> logger, ApplicationDbContext context)
         {
@@ -28,16 +29,14 @@ namespace TheLendingCircle.Pages.Items
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = _context.Users.First(i => i.Email == "jim@bob.com");
-            var item = _context.Items.First(i => i.Id == Id);
+            var item = _context.Items.Where(i => i.Id == Id).Include("Owner").First();
             if (item == null)
             {
                 return NotFound($"Unable to item user with ID '{Id}'.");
             }
             CurrentItem = item;
-            _logger.LogInformation($"Owner: {CurrentItem.Owner}");
+            // _logger.LogInformation($"Owner: {CurrentItem.Owner}");
 
-            // Owner = await _context.Users.FindAsync(CurrentItem.Owner.Id);
             return Page();
         }
     }
