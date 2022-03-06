@@ -34,7 +34,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         public ApplicationUser CurrentUser { get; set; }
 
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync()
         {
             CurrentUser = await _userManager.GetUserAsync(User);
             if (CurrentUser == null)
@@ -44,7 +44,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        // public async Task<IActionResult> OnPostAsync(int? id)
+        // public async Task<IActionResult> OnPostAsync()
         // {
 
         // }
