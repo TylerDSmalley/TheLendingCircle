@@ -1,43 +1,101 @@
 ﻿@page "{id:int}"
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+<link rel="stylesheet" href="~/css/ratings.css" />
+}
 @model TheLendingCircle.Pages.MyCircle.CloseCircleModel
 @{
     ViewData["Title"] = "Close Circle";
 }
 
-<h1>Closing Circle</h1>
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover" style="background-color: lightskyblue;"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
 
-<h4>Review</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Review.ReviewBody" class="control-label"></label>
-                <input asp-for="Review.ReviewBody" class="form-control" />
-                <span asp-validation-for="Review.ReviewBody" class="text-danger"></span>
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index"
+                        title="Manage">Edit Profile</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Review.CreationTime" class="control-label"></label>
-                <input asp-for="Review.CreationTime" class="form-control" />
-                <span asp-validation-for="Review.CreationTime" class="text-danger"></span>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
+                        ITEMS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link active show"
+                        style="color: lightskyblue;" data-toggle="tab">OPEN CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                        REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <h2 class="mt-2">Close Circle</h2>
+            <hr />
+
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header fw-light fst-italic">Review</div>
+                    <div class="card-body">
+                        <form id="reviewForm" method="post" class="w-100 row g-4 needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-floating  col-md-4">
+                                <label asp-for="Input.ReviewBody" class="control-label"></label>
+                                <input asp-for="Input.ReviewBody" class="form-control" />
+                                <span asp-validation-for="Input.ReviewBody" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating  col-md-4">
+                                <input id="Rating-1" type="radio" asp-for="Input.Rating" value="1" checked="checked">
+                                <label for="Rating-1">1 star</label>
+                                <input id="Rating-2" type="radio" asp-for="Input.Rating" value="2">
+                                <label for="Rating-2">2 stars</label>
+                                <input id="Rating-3" type="radio" asp-for="Input.Rating" value="3">
+                                <label for="Rating-3">3 stars</label>
+                                <input id="Rating-4" type="radio" asp-for="Input.Rating" value="4">
+                                <label for="Rating-4">4 stars</label>
+                                <input id="Rating-5" type="radio" asp-for="Input.Rating" value="5">
+                                <label for="Rating-5">5 stars</label>
+
+                                <div class="stars">
+                                    <label for="Rating-1" aria-label="1 star" title="1 star"></label>
+                                    <label for="Rating-2" aria-label="2 stars" title="2 stars"></label>
+                                    <label for="Rating-3" aria-label="3 stars" title="3 stars"></label>
+                                    <label for="Rating-4" aria-label="4 stars" title="4 stars"></label>
+                                    <label for="Rating-5" aria-label="5 stars" title="5 stars"></label>
+                                </div>
+
+                                <span asp-validation-for="Input.Rating" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating  col-md-4">
+                                <label asp-for="Input.ItemCondition" class="control-label"></label>
+                                <input asp-for="Input.ItemCondition" class="form-control"
+                                    value="@Model.CurrentLoan.ItemLoaned.Condition" />
+                                <span asp-validation-for="Input.ItemCondition" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating  col-md-4">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Review.Rating" class="control-label"></label>
-                <input asp-for="Review.Rating" class="form-control" />
-                <span asp-validation-for="Review.Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
