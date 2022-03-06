@@ -1,0 +1,37 @@
+﻿@page "{id:int}"
+@model UserPhotoUploadModel
+@{
+    ViewData["Title"] = "Photo Upload";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<div class="container-xl px-4 mt-4">
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Photo upload form-->
+            <div class="card mb-4">
+                <div class="card-header">Profile Photo Upload</div>
+                <div class="card-body">
+                    <form id="registerForm" method="post"
+                        class="w-100 row g-4 needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating  col-md-4">
+                            <input asp-for="Input.userPhoto" class="form-control" />
+                            <label asp-for="Input.userPhoto" class="form-label fst-italic ms-1"></label>
+                            <span asp-validation-for="Input.userPhoto" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button id="registerSubmit" type="submit"
+                                class="w-100 btn btn-lg btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
