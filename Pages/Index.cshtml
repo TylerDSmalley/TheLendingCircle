@@ -17,29 +17,36 @@
         </input>
     </div>
 
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5">
-        @for (int i = 0; i < 6; i++)
+    <div class="row row-cols-2 row-cols-lg-5 justify-content-between">
+        @foreach (var item in @Model.ItemsList)
         {
-                <div class="col d-flex flex-column align-items-center">
-            <a class="text-decoration-none" asp-page="/Items/Index" asp-route-id="@i">
+            <div class="col d-flex flex-column align-items-center">
+                <a class="text-decoration-none" asp-page="/Items/Index" asp-route-id="@item.Id">
                     <div
                     class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
                         <img class="p-0 roundedcorners container-fluid mb-4"
                         src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" alt="item" />
                         <div class="mx-1">
-                            <h5>Item Name</h5>
-                            <h6 class="text-secondary"><b>Condition</b></h6>
+                            <h5>@item.Title</h5>
+                            <h6 class="text-secondary"><b>@item.Condition</b></h6>
                         </div>
                     </div>
-            </a>
-                    <div class="border-light rounded-circle link-success" style="border-style:solid;border-width:10px;position: relative;bottom: 40px;right: -82px;">
+                </a>
+                @if (item.Available)
+                {
+                    <div class="border-light rounded-circle link-success"
+                style="border-style:solid;border-width:10px;position: relative;bottom: 40px;right: -82px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                        class="bi bi-check-circle" viewBox="0 0 16 16">
+                    class="bi bi-check-circle" viewBox="0 0 16 16">
                             <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
                     </div>
-                </div>
+                }
+            </div>
         }
+    </div>
+    <div style="width:300px" class="mx-auto">
+        <a class="btn btn-primary container-fluid px-5">See more</a>
     </div>
 </div>
