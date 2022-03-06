@@ -36,7 +36,7 @@ namespace TheLendingCircle.Models
         public double AvgRating { get; set; }
 
         [Required, StringLength(500, MinimumLength = 1, ErrorMessage ="Condition must be between 1 and 500 characters")]
-        [Display(Name = "ItemPhotoPath")]
+        [Display(Name = "UserPhotoPath")]
         public string UserPhotoPath { get; set; }
     }
 }
