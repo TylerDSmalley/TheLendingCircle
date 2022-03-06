@@ -8,6 +8,7 @@
 }
 @model TheLendingCircle.Pages.MyCircle.CircleRequestsModel
 @{
+    ViewData["Title"] = "Circle Requests";
 }
 
 <div class="container">
@@ -30,9 +31,12 @@
             <ul class="profile-header-tab nav nav-tabs">
                 <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link active show" style="color: lightsalmon;" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link active show"
+                        style="color: lightsalmon;" data-toggle="tab">CIRCLE REQUESTS</a></li>
                 <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
@@ -42,16 +46,16 @@
                 <h2>My Circle Requests</h2>
             </div>
             <p class="mt-3 mb-0 w-25 fw-light fst-italic">Requested Circles</p>
-            <hr/>
+            <hr />
 
-            
+
             @foreach (var request in Model.CircleRequests)
             {
                 <div class="Container bg-light bd-highlight my-4">
                     <div class="row">
                         <div class="col col-lg-8">
                             <div class="m-b-10"><b>My Item</b></div>
-                            
+
                             <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 " alt="" />
                         </div>
                         <div class="col-md-4 hidden-xs hidden-sm">
@@ -72,7 +76,8 @@
                                 <li>
                                     <div class="field">Borrower Profile:</div>
                                     <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id" asp-page="#../Users/UserProfile">@request.Borrower.Email</a>
+                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
+                                        asp-page="#../Users/UserProfile">@request.Borrower.Email</a>
                                     </div>
                                 </li>
                                 <li>
@@ -84,24 +89,27 @@
                                     <div class="value">@request.ItemLoaned.Title</div>
                                 </li>
                                 <li>
-                                    <div class="field"><button class="btn btn-danger">Approve request</button></div>
-                                    <div class="field"><button class="btn btn-danger">Deny request</button></div>
+                                    <a class="field btn btn-xs btn-primary mb-2" asp-route-id="@request.Id" asp-page="./CreateLoan">Approve Request</a>
+                                    <form method="post" class="field">
+                                        <input asp-for="Input.Id" type="hidden" value="@request.Id" aria-required="true" />
+                                        <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Deny request</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <hr/>
+                <hr />
             }
             <p class="mt-3 mb-0 w-25 fw-light fst-italic">My pending requests</p>
-            <hr/>
+            <hr />
             @foreach (var request in Model.PendingRequests)
             {
                 <div class="Container bg-light bd-highlight my-4">
                     <div class="row">
                         <div class="col col-lg-8">
                             <div class="m-b-10"><b>My Item</b></div>
-                            
+
                             <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 " alt="" />
                         </div>
                         <div class="col-md-4 hidden-xs hidden-sm">
@@ -122,7 +130,8 @@
                                 <li>
                                     <div class="field">Borrower Profile:</div>
                                     <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id" asp-page="#../Users/UserProfile">@request.Owner.Email</a>
+                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
+                                        asp-page="#../Users/UserProfile">@request.Owner.Email</a>
                                     </div>
                                 </li>
                                 <li>
@@ -140,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <hr/>
+                <hr />
             }
         </div>
     </div>

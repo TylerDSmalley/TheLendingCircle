@@ -1,0 +1,72 @@
+﻿@page "{id:int}"
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+}
+@model TheLendingCircle.Pages.MyCircle.CreateLoanModel
+@{
+    ViewData["Title"] = "Open Circle";
+}
+
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover" style="background-color: lightsalmon;"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
+
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index"
+                        title="Manage">Edit Profile</a>
+                </div>
+            </div>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
+                        ITEMS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link active show"
+                        style="color: lightsalmon;" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-row align-items-center mb-0 mt-2">
+                <h2>Confirm Request</h2>
+            </div>
+            <hr />
+
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header">Open Circle</div>
+                    <div class="card-body">
+                        <form id="registerForm" method="post" class="w-100 row g-4 needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-floating  col-md-4">
+                                <input type="date" asp-for="Input.DueDate" class="form-control" aria-required="true"/>
+                                <label asp-for="Input.DueDate" class="form-label fst-italic ms-1"></label>
+                                <span asp-validation-for="Input.DueDate" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-12">
+                                <button id="loanSubmit" type="submit"
+                                    class="w-100 btn btn-lg btn-primary">Open Circle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

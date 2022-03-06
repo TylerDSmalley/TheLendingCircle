@@ -9,35 +9,28 @@ using System.ComponentModel.DataAnnotations;
 namespace TheLendingCircle.Pages.MyCircle
 {
     [Authorize]
-    public class CircleRequestsModel : PageModel
+    public class CreateLoanModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;
-
-        public CircleRequestsModel(UserManager<ApplicationUser> userManager,
+        public CreateLoanModel(UserManager<ApplicationUser> userManager,
             TheLendingCircle.Data.ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;
         }
-        public ApplicationUser CurrentUser { get; set; }
-        public List<Request> CircleRequests { get; set; }
-        public List<Request> PendingRequests { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
         {
-            public int Id { get; set; }
+            public DateTime DueDate { get; set; }
         }
-        private async Task LoadAsync(string id)
-        {
-            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == id).ToListAsync();
-            PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == id).ToListAsync();
-        }
+        public ApplicationUser CurrentUser { get; set; }
+        public Request CurrentRequest { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             var user = await _userManager.GetUserAsync(User);
             CurrentUser = user;
@@ -45,19 +38,27 @@ namespace TheLendingCircle.Pages.MyCircle
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            await LoadAsync(user.Id);
+            var Request = await _context.Requests.FindAsync(id);
+            if(Request == null) 
+            {
+                return NotFound("Unable to load Request with ID");
+            }
+            CurrentRequest = Request;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var deleteRequest = await _context.Requests.FindAsync(Input.Id);
-            if (deleteRequest != null)
+            if (ModelState.IsValid)
             {
-                _context.Requests.Remove(deleteRequest);
+                var newLoan = new TheLendingCircle.Models.Loan { CreationTime =  DateTime.Now, DueDate = Input.DueDate, HasBeenViewed = false, Status = "open", Owner = CurrentRequest.Owner, Borrower = CurrentRequest.Borrower, ItemLoaned = CurrentRequest.ItemLoaned};
+                _context.Loans.Add(newLoan);
                 await _context.SaveChangesAsync();
+                _context.Requests.Remove(CurrentRequest);
+                await _context.SaveChangesAsync();
+            return RedirectToPage("./OpenCircles");
             }
-            return RedirectToPage("./CircleRequests");
+            return Page();
         }
     }
 }
