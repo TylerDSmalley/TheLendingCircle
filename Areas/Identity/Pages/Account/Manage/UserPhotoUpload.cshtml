@@ -1,35 +1,32 @@
-﻿@page "{id:int}"
+﻿@page 
 @model TheLendingCircle.Areas.Identity.Pages.Account.Manage.UserPhotoUploadModel
 @{
     ViewData["Title"] = "Photo Upload";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<div class="container-xl px-4 mt-4">
-    <div class="row">
-        <div class="col-xl-12">
+<div class="container d-flex justify-content-start w-100">
+    
             <!-- Photo upload form-->
             <div class="card mb-4">
                 <div class="card-header">Profile Photo Upload</div>
                 <div class="card-body">
-                    <form id="registerForm" method="post"
-                        class="w-100 row g-4 needs-validation" novalidate>
+                    <form id="registerForm" method="post" class="needs-validation" novalidate>
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-floating  col-md-4">
-                            <input asp-for="Input.userPhoto" class="form-control" />
+                        <div class="mb-3">
                             <label asp-for="Input.userPhoto" class="form-label fst-italic ms-1"></label>
+                            <input asp-for="Input.userPhoto" accept="image/png, image/jpeg" class="form-control" />
                             <span asp-validation-for="Input.userPhoto" class="text-danger"></span>
                         </div>
                         
-                        <div class="col-12">
+                        <div class="container d-flex justify-content-center">
                             <button id="registerSubmit" type="submit"
-                                class="w-100 btn btn-lg btn-primary">Submit</button>
+                                class="btn btn-lg btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+        
 </div>
 
 @section Scripts {
