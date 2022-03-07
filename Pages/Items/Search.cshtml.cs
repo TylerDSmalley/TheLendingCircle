@@ -20,8 +20,6 @@ namespace TheLendingCircle.Pages.Items
         [BindProperty]
         public string? SearchString { get; set; }
 
-        public int itemCount {get;set;} = 0;
-
         public List<Item> ItemsList { get; set; } = new List<Item>();
 
         public void OnGet()
@@ -34,13 +32,13 @@ namespace TheLendingCircle.Pages.Items
             return Redirect("./Search?query=" + SearchString);
         }
 
-        private void GetItems()
+        private void GetItems(int itemCount = 0)
         {
             if (string.IsNullOrEmpty(Query))
             {
                 ItemsList = _context.Items
                                 .Skip(itemCount)
-                                .Take(6)
+                                .Take(3)
                                 .Include("Owner")
                                 .ToList();
             }
@@ -48,7 +46,7 @@ namespace TheLendingCircle.Pages.Items
             {
                 ItemsList = _context.Items
                     .Skip(itemCount)
-                    .Take(6)
+                    .Take(3)
                     .Where(item =>
                         item.Title
                             .ToLower()
@@ -57,13 +55,12 @@ namespace TheLendingCircle.Pages.Items
                     .Include("Owner")
                     .ToList();
             }
-            itemCount += 6;
         }
 
 
-        public JsonResult OnGetLoadMore()
+        public JsonResult OnGetLoadMore(int itemCount)
         {
-            GetItems();
+            GetItems(itemCount);
             return new JsonResult(ItemsList);
         }
     }
