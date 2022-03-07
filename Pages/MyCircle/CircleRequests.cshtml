@@ -143,7 +143,10 @@
                                     <div class="value">@request.ItemLoaned.Title</div>
                                 </li>
                                 <li>
-                                    <div class="field"><button class="btn btn-danger">Delete request</button></div>
+                                    <form method="post" class="field">
+                                        <input asp-for="Input.Id" type="hidden" value="@request.Id" aria-required="true" />
+                                        <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Delete request</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>
