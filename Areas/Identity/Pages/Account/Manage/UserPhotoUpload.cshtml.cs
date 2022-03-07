@@ -54,62 +54,69 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-         public async Task<IActionResult> OnPostAsync(string id)
-         {
-              if(ModelState.IsValid){
+        public async Task<IActionResult> OnPostAsync(string id)
+        {
+            if (ModelState.IsValid)
+            {
 
-                s3Client = new AmazonS3Client("fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6","AKIAXJR27NJ66LXTY6EN",bucketRegion);
+                s3Client = new AmazonS3Client("fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", "AKIAXJR27NJ66LXTY6EN", bucketRegion);
                 string imagePath = "";
 
-                if(Input.userPhoto != null){
+                if (Input.userPhoto != null)
+                {
                     string fileExtension = Path.GetExtension(Input.userPhoto.FileName).ToLower();
                     string filePath = Path.GetFullPath(Input.userPhoto.FileName);
-                    string[] allowedExtensions ={".jpg",".jpeg",".gif",".png"};
-                
-                if(!allowedExtensions.Contains(fileExtension)){
-                    ModelState.AddModelError(string.Empty,"Only image files (jpeg, jpg, gif, png) are allowed");
-                    return Page();
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    if (!allowedExtensions.Contains(fileExtension))
+                    {
+                        ModelState.AddModelError(string.Empty, "Only image files (jpeg, jpg, gif, png) are allowed");
+                        return Page();
                     }
 
                     var invalids = System.IO.Path.GetInvalidFileNameChars();
-                    
-                    var newName = String.Join("_", Input.userPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries) ).TrimEnd('.');
-                
-                    try{
-                      var fileTransferUtility = new TransferUtility(s3Client);
+
+                    var newName = String.Join("_", Input.userPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
+
+                    try
+                    {
+                        var fileTransferUtility = new TransferUtility(s3Client);
 
                         await fileTransferUtility.UploadAsync(filePath, bucketName);
-                         Console.WriteLine("Upload 1 completed");
-                     
-                    }catch(AmazonS3Exception ex){
-                            ModelState.AddModelError(string.Empty,"Amazon S3 Exception Error saving the uploaded file");
-                            return Page();
-                    }
-                    catch(Exception ex){
-                        Console.WriteLine(ex);
-                           // ModelState.AddModelError(string.Empty,"Internal Error saving the uploaded file");
-                            return Page();
-                    }
-                        imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/",newName);
-                }   
+                        Console.WriteLine("Upload 1 completed");
 
-                 ApplicationUser? user1 = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-                    if (user1 == null)
+                    }
+                    catch (AmazonS3Exception ex)
                     {
-                    return NotFound();
-                    }
-                    user1.UserPhotoPath = imagePath;
-
-                     if (!ModelState.IsValid)
-                        {
+                        ModelState.AddModelError(string.Empty, "Amazon S3 Exception Error saving the uploaded file");
                         return Page();
-                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        // ModelState.AddModelError(string.Empty,"Internal Error saving the uploaded file");
+                        return Page();
+                    }
+                    imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/", newName);
+                }
 
-                    await _context.SaveChangesAsync();
+                ApplicationUser? user1 = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+                if (user1 == null)
+                {
+                    return NotFound();
+                }
+                user1.UserPhotoPath = imagePath;
 
-            return RedirectToPage("/Index");
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("/Index");
             }
             return Page();
-         }
+        }
     }
 }
