@@ -1,7 +1,7 @@
 @page "{id:int}"
 @model TheLendingCircle.Pages.Items.Index
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Item Page";
 }
 
 <div class="d-lg-flex gap-3">
@@ -23,6 +23,16 @@
         </h3>
         <h5><a asp-page="/Profile" asp-route-id="@Model.CurrentItem.Id">@Model.CurrentItem.Owner</a></h5>
         <p>@Model.CurrentItem.Description</p>
-        <button class="btn btn-success">Request</button>
+
+        <form method="post">
+            <h4>
+                <label asp-for="RequestMessage" class="control-label"></label>
+            </h4>
+            <span asp-validation-for="RequestMessage" class="text-danger"></span>
+            <textarea asp-for="RequestMessage" style="height:150px" class="my-2 form-control" placeholder="Leave a message..."></textarea>
+            <div>
+                <button type="submit" class="px-5 btn btn-success">Request</button>
+            </div>
+        </form>
     </div>
 </div>
