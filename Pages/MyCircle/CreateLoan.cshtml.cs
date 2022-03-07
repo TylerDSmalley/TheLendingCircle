@@ -38,7 +38,7 @@ namespace TheLendingCircle.Pages.MyCircle
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var Request = await _context.Requests.FindAsync(id);
+            var Request = await _context.Requests.Where(r => r.Id == id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).FirstAsync();
             if(Request == null) 
             {
                 return NotFound("Unable to load Request with ID");
@@ -47,14 +47,17 @@ namespace TheLendingCircle.Pages.MyCircle
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (ModelState.IsValid)
             {
-                var newLoan = new TheLendingCircle.Models.Loan { CreationTime =  DateTime.Now, DueDate = Input.DueDate, HasBeenViewed = false, Status = "open", Owner = CurrentRequest.Owner, Borrower = CurrentRequest.Borrower, ItemLoaned = CurrentRequest.ItemLoaned};
+                var Request = await _context.Requests.Where(r => r.Id == id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).FirstAsync();
+                var item = await _context.Items.Where(i => i.Id == Request.ItemLoaned.Id).FirstAsync();
+                var newLoan = new TheLendingCircle.Models.Loan { CreationTime =  DateTime.Now, DueDate = Input.DueDate, HasBeenViewed = false, Status = "open", Owner = Request.Owner, Borrower = Request.Borrower, ItemLoaned = Request.ItemLoaned};
+                item.Available = false;
                 _context.Loans.Add(newLoan);
                 await _context.SaveChangesAsync();
-                _context.Requests.Remove(CurrentRequest);
+                _context.Requests.Remove(Request);
                 await _context.SaveChangesAsync();
             return RedirectToPage("./OpenCircles");
             }

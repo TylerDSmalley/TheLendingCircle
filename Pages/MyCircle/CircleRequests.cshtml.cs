@@ -33,8 +33,8 @@ namespace TheLendingCircle.Pages.MyCircle
         }
         private async Task LoadAsync(string id)
         {
-            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == id).Include("Owner").ToListAsync();
-            PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == id).Include("Borrower").ToListAsync();
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
+            PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == CurrentUser.Id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -46,10 +46,10 @@ namespace TheLendingCircle.Pages.MyCircle
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             await LoadAsync(user.Id);
-            foreach(var request in CircleRequests){
-                request.HasBeenViewed = true;
-            }
-            await _context.SaveChangesAsync();
+            // foreach(var request in CircleRequests){
+            //     request.HasBeenViewed = true;
+            // }
+            // await _context.SaveChangesAsync();
             return Page();
         }
 
