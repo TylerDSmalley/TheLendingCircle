@@ -142,15 +142,23 @@ body .fc-widget-header a {
     float: left;
     width: 7.5rem;
     height: 7.5rem;
-    overflow: hidden;
     z-index: 10;
-    margin: 0 1.25rem -1.25rem 0;
-    padding: 0.1875rem;
+    border: #fff thick solid;
     -webkit-border-radius: 0.25rem;
     -moz-border-radius: 0.25rem;
     border-radius: 0.25rem;
     background: #fff;
 }
+.cover {
+    object-fit: cover;
+    width: 7rem;
+    height: 7rem;
+    border: #fff solid thick;
+}
+.checked {
+    color: orange;
+}
+
 .profile-header-info h4 {
     font-weight: 500;
     margin-bottom: 0.3125rem;

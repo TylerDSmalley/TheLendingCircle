@@ -17,8 +17,8 @@
         <div class="profile-header">
             <div class="profile-header-cover" style="background-color: lightskyblue;"></div>
             <div class="profile-header-content">
-                <div class="profile-header-img rounded-circle mb-4">
-                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                <div class="">
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
                 </div>
 
                 <div class="profile-header-info">
@@ -30,34 +30,36 @@
             </div>
 
             <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
+                <li class="nav-item mt-1"><a href="../MyItems" class="nav-link" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                <li class="nav-item mt-1"><a href="../ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
                         CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link active show"
+                <li class="nav-item mt-1"><a href="../OpenCircles" class="nav-link active show"
                         style="color: lightskyblue;" data-toggle="tab">OPEN CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                <li class="nav-item mt-1"><a href="../CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
                         REQUESTS</a></li>
-                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+                <li class="nav-item mt-1"><a href="../MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
 
         <div class="container d-flex flex-column justify-content-evenly w-75">
             <h2 class="mt-2">Close Circle</h2>
             <hr />
-
-            <div class="col-xl-8">
+            <div class="container d-flex flex-column justify-content-center w-50">
                 <div class="card mb-4">
-                    <div class="card-header fw-light fst-italic">Review</div>
-                    <div class="card-body">
-                        <form id="reviewForm" method="post" class="w-100 row g-4 needs-validation" novalidate>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-floating  col-md-4">
+                <div class="card-header fw-light fst-italic">Review</div>
+                <div class="card-body">
+                    <form id="reviewForm" method="post" class="w-100 g-4 needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row g-3">
+                            <div class="form-floating col-md-12 mb-4">
+                                <textarea asp-for="Input.ReviewBody" height="50px" class="form-control"></textarea>
                                 <label asp-for="Input.ReviewBody" class="control-label"></label>
-                                <input asp-for="Input.ReviewBody" class="form-control" />
                                 <span asp-validation-for="Input.ReviewBody" class="text-danger"></span>
                             </div>
-                            <div class="form-floating  col-md-4">
+                        </div>
+                        <div class="row g-3">
+                            <div class="form  col-md-12">
                                 <input id="Rating-1" type="radio" asp-for="Input.Rating" value="1" checked="checked">
                                 <label for="Rating-1">1 star</label>
                                 <input id="Rating-2" type="radio" asp-for="Input.Rating" value="2">
@@ -68,7 +70,6 @@
                                 <label for="Rating-4">4 stars</label>
                                 <input id="Rating-5" type="radio" asp-for="Input.Rating" value="5">
                                 <label for="Rating-5">5 stars</label>
-
                                 <div class="stars">
                                     <label for="Rating-1" aria-label="1 star" title="1 star"></label>
                                     <label for="Rating-2" aria-label="2 stars" title="2 stars"></label>
@@ -76,13 +77,14 @@
                                     <label for="Rating-4" aria-label="4 stars" title="4 stars"></label>
                                     <label for="Rating-5" aria-label="5 stars" title="5 stars"></label>
                                 </div>
-
                                 <span asp-validation-for="Input.Rating" class="text-danger"></span>
                             </div>
-                            <div class="form-floating  col-md-4">
-                                <label asp-for="Input.ItemCondition" class="control-label"></label>
+                        </div>
+                        <div class="row g-3">
+                            <div class="form-floating  col-md-12 mb-4">
                                 <select asp-for="Input.ItemCondition" class="form-select">
-                                    <option value="@Model.CurrentLoan.ItemLoaned.Condition" selected>@Model.CurrentLoan.ItemLoaned.Condition</option>
+                                    <option value="@Model.CurrentLoan.ItemLoaned.Condition" selected>
+                                        @Model.CurrentLoan.ItemLoaned.Condition</option>
                                     <option value="Like New">Like New</option>
                                     <option value="Great">Great</option>
                                     <option value="Good">Good</option>
@@ -90,14 +92,18 @@
                                     <option value="Poor">Poor</option>
                                     <option value="Barely hanging on">Barely hanging on</option>
                                 </select>
+                                <label asp-for="Input.ItemCondition" class="control-label"></label>
                                 <span asp-validation-for="Input.ItemCondition" class="text-danger"></span>
                             </div>
+                        </div>
+                        <div class="row g-3">
                             <div class="form-floating  col-md-4">
-                                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Submit" class="btn btn-primary" />
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
             </div>
         </div>
     </div>

@@ -26,8 +26,8 @@ namespace TheLendingCircle.Pages.MyCircle
         public List<Loan> BorrowedItems { get; set; }
         private async Task LoadAsync(string id)
         {
-            LoanedItems = await _context.Loans.Where(l => l.Owner.Id == id && l.Status == "closed").ToListAsync();
-            BorrowedItems = await _context.Loans.Where(l => l.Borrower.Id == id && l.Status == "closed").ToListAsync();
+            LoanedItems = await _context.Loans.Where(l => l.Owner.Id == id && l.Status == "closed").Include(l => l.ItemLoaned).Include(r => r.Owner).Include(r => r.Borrower).ToListAsync();
+            BorrowedItems = await _context.Loans.Where(l => l.Borrower.Id == id && l.Status == "closed").Include(l => l.ItemLoaned).Include(r => r.Owner).Include(r => r.Borrower).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()

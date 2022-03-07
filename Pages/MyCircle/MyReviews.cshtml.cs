@@ -25,7 +25,7 @@ namespace TheLendingCircle.Pages.MyCircle.MyReviews
         public List<Review> Reviews { get; set; }
         private async Task LoadAsync(string id)
         {
-            Reviews = await _context.Reviews.Where(r => r.Borrower.Id == id).ToListAsync();
+            Reviews = await _context.Reviews.Where(r => r.Borrower.Id == id).Include(r => r.Owner).Include(r => r.Borrower).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()

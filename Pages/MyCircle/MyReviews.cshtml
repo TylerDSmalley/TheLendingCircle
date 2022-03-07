@@ -5,6 +5,7 @@
 @inject UserManager<ApplicationUser> UserManager
 @section Styles {
 <link rel="stylesheet" href="~/css/MyCircle.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 }
 @model TheLendingCircle.Pages.MyCircle.MyReviews.MyReviewsModel
 @{
@@ -16,8 +17,8 @@
         <div class="profile-header">
             <div class="profile-header-cover" style="background-color: lightpink;"></div>
             <div class="profile-header-content">
-                <div class="profile-header-img rounded-circle mb-4">
-                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                <div class="">
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
                 </div>
 
                 <div class="profile-header-info">
@@ -31,26 +32,32 @@
             <ul class="profile-header-tab nav nav-tabs">
                 <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a></li>
-                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link active show" style="color: lightpink;" data-toggle="tab">MY REVIEWS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                        REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link active show" style="color: lightpink;"
+                        data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
 
         <div class="container d-flex flex-column justify-content-evenly w-75">
             <h2 class="mt-2">My Circle Reputation</h2>
-            <hr/>
+            <hr />
 
-            
+
             @foreach (var review in Model.Reviews)
             {
                 <div class="Container d-flex flex-row justify-content-evenly my-4">
                     <div class="card">
                         <div class="card-header">
-                            Review by: <a class="nav-item" asp-area="" asp-route-id="@review.Borrower.Id" asp-page="#../Users/UserProfile">@review.Owner.Email</a>
+                            Review by: <a class="nav-item" asp-area="" asp-route-id="@review.Borrower.Id"
+                            asp-page="#../Users/UserProfile">@review.Owner.Email</a>
                         </div>
-                            <ul class="profile-info-list">
+                        <div class="card-body p-2">
+                            <ul class="profile-info-list p-2">
                                 <li class="title">Review Details</li>
                                 <li>
                                     <div class="field">Loaner Submitted Review:</div>
@@ -58,7 +65,74 @@
                                 </li>
                                 <li>
                                     <div class="field">Rating given:</div>
-                                    <div class="value">@review.Rating</div>
+                                    @{
+                                        switch(@review.Rating)
+                                        {
+                                        case 0:
+                                            <text>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;
+                                        case 1:
+                                            <text>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;
+                                        case 2:
+                                            <text>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;
+                                        case 3:
+                                            <text>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;
+                                        case 4:
+                                            <text>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;  
+                                        case 5:
+                                            <text>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                            </text>
+                                        break;
+                                        default:
+                                            <text>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </text>
+                                        break;                   
+                                    }
+                                }
                                 </li>
                                 <li>
                                     <div class="field">Reviewer:</div>
@@ -67,14 +141,14 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div class="card-footer text-muted">
-                                Date Reviewed: @review.CreationTime
-                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Date Reviewed: @review.CreationTime.ToShortDateString()
+                        </div>
                     </div>
                 </div>
-                <hr/>
+                <hr />
             }
         </div>
     </div>
 </div>
-
