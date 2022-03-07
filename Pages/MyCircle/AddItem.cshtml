@@ -1,53 +1,92 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject UserManager<ApplicationUser> UserManager
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+}
 @model TheLendingCircle.Pages.MyCircle.AddItemModel
 @{
     ViewData["Title"] = "Add Item";
 }
 
-<h1>Add</h1>
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
 
-<h4>Item</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group mb-3">
-                <label asp-for="Input.Title" class="control-label"></label>
-                <input asp-for="Input.Title" class="form-control" />
-                <span asp-validation-for="Input.Title" class="text-danger"></span>
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index"
+                        title="Manage">Edit Profile</a>
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Input.Description" class="control-label"></label>
-                <textarea asp-for="Input.Description" height = "50px" class="form-control"></textarea>
-                <span asp-validation-for="Input.Description" class="text-danger"></span>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link active show" data-toggle="tab">MY
+                        ITEMS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                        REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-row align-items-center mb-0 mt-2">
+                <h2 class="mb-0">Add Item Photo</h2>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Input.Condition" class="control-label"></label>
-                <input asp-for="Input.Condition" class="form-control" />
-                <span asp-validation-for="Input.Condition" class="text-danger"></span>
+            <hr />
+
+            <div class="container d-flex justify-content-center w-100">
+                <!-- Photo upload form-->
+                <div class="card mb-4">
+                    <div class="card-header">Profile Photo Upload</div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Title" class="control-label"></label>
+                                <input asp-for="Input.Title" class="form-control" />
+                                <span asp-validation-for="Input.Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Description" class="control-label"></label>
+                                <textarea asp-for="Input.Description" height="50px" class="form-control"></textarea>
+                                <span asp-validation-for="Input.Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Condition" class="control-label"></label>
+                                <select asp-for="Input.Condition" class="form-select">
+                                    <option selected>Choose...</option>
+                                    <option value="Like New">Like New</option>
+                                    <option value="Great">Great</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Used">Used</option>
+                                    <option value="Poor">Poor</option>
+                                    <option value="Barely hanging on">Barely hanging on</option>
+                                </select>
+                                <span asp-validation-for="Input.Condition" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="Input.ItemPhotoPath" class="control-label"></label>
-                <input asp-for="Input.ItemPhotoPath" class="form-control" value="This will be a file picker" />
-                <span asp-validation-for="Input.ItemPhotoPath" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check mb-3">
-                <label asp-for="Input.Available" class="form-check-label">
-                    <input class="form-check-input" asp-for="Input.Available" /> Available
-                </label>
-            </div>
-            <div class="form-group mb-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

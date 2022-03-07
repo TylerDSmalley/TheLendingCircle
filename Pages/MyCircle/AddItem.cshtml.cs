@@ -1,11 +1,12 @@
 #nullable disable
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace TheLendingCircle.Pages.MyCircle
 {
@@ -21,12 +22,14 @@ namespace TheLendingCircle.Pages.MyCircle
             _context = context;
         }
 
+        public ApplicationUser CurrentUser { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
         {
-            [Required, StringLength(100, MinimumLength = 1, ErrorMessage ="Title must be between 1 and 100 characters")]
+        [Required, StringLength(100, MinimumLength = 1, ErrorMessage ="Title must be between 1 and 100 characters")]
         [Display(Name = "Title")]
         public string Title { get; set; }
 
@@ -37,18 +40,15 @@ namespace TheLendingCircle.Pages.MyCircle
         [Required, StringLength(100, MinimumLength = 1, ErrorMessage ="Condition must be between 1 and 100 characters")]
         [Display(Name = "Condition")]
         public string Condition { get; set; }
-
-        [Required, StringLength(500, MinimumLength = 1, ErrorMessage ="Condition must be between 1 and 500 characters")]
-        [Display(Name = "ItemPhotoPath")]
-        public string ItemPhotoPath { get; set; }
-
-        [Required]
-        [Display(Name = "Available")]
-        public bool Available { get; set; }
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            CurrentUser = await _userManager.GetUserAsync(User);
+            if (CurrentUser == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
             return Page();
         }
 
@@ -68,14 +68,14 @@ namespace TheLendingCircle.Pages.MyCircle
                 Title = Input.Title, 
                 Description = Input.Description, 
                 Condition = Input.Condition, 
-                ItemPhotoPath = Input.ItemPhotoPath, 
-                Available = Input.Available, 
+                ItemPhotoPath = "http://bootdey.com/img/Content/avatar/avatar1.png", 
+                Available = true, 
                 Owner = user
             };
             _context.Items.Add(newItem);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./MyCircle");
+            return RedirectToPage("./MyItems");
         }
     }
 }
