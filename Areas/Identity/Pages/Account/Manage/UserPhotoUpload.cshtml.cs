@@ -38,7 +38,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             //Maybe filesize limit annotation
-            public IFormFile? userPhoto { get; set; }
+            public IFormFile userPhoto { get; set; }
         }
 
         public ApplicationUser CurrentUser { get; set; }
@@ -47,6 +47,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync(string? id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
+            
             if (CurrentUser == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -59,44 +60,29 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
             if (ModelState.IsValid)
             {
 
-                s3Client = new AmazonS3Client("fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", "AKIAXJR27NJ66LXTY6EN", bucketRegion);
+
+                s3Client = new AmazonS3Client(bucketRegion);
                 string imagePath = "";
 
                 if (Input.userPhoto != null)
                 {
                     string fileExtension = Path.GetExtension(Input.userPhoto.FileName).ToLower();
                     string filePath = Path.GetFullPath(Input.userPhoto.FileName);
-                    string[] allowedExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+                    
+                    Console.WriteLine(filePath);
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
                     if (!allowedExtensions.Contains(fileExtension))
                     {
-                        ModelState.AddModelError(string.Empty, "Only image files (jpeg, jpg, gif, png) are allowed");
+                        ModelState.AddModelError(string.Empty, "Only image files (jpeg, jpg, png) are allowed");
                         return Page();
                     }
 
                     var invalids = System.IO.Path.GetInvalidFileNameChars();
-
                     var newName = String.Join("_", Input.userPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
+            
+                    UploadFileToS3(Input.userPhoto);
 
-                    try
-                    {
-                        var fileTransferUtility = new TransferUtility(s3Client);
-
-                        await fileTransferUtility.UploadAsync(filePath, bucketName);
-                        Console.WriteLine("Upload 1 completed");
-
-                    }
-                    catch (AmazonS3Exception ex)
-                    {
-                        ModelState.AddModelError(string.Empty, "Amazon S3 Exception Error saving the uploaded file");
-                        return Page();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                        // ModelState.AddModelError(string.Empty,"Internal Error saving the uploaded file");
-                        return Page();
-                    }
                     imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/", newName);
                 }
 
@@ -114,9 +100,33 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToPage("/Index");
+                return RedirectToPage("./Index");
             }
             return Page();
         }
+
+
+        public async Task UploadFileToS3(IFormFile file)
+        {
+        using (var client = new AmazonS3Client("AKIAXJR27NJ66LXTY6EN", "fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", RegionEndpoint.USEast1))
+        {
+        using (var newMemoryStream = new MemoryStream())
+        {
+            file.CopyTo(newMemoryStream);
+
+            var uploadRequest = new TransferUtilityUploadRequest
+            {
+                InputStream = newMemoryStream,
+                Key = file.FileName,
+                BucketName = bucketName,
+                CannedACL = S3CannedACL.PublicRead
+            };
+
+            var fileTransferUtility = new TransferUtility(client);
+            await fileTransferUtility.UploadAsync(uploadRequest);
+        }
     }
+}
+    
+}
 }
