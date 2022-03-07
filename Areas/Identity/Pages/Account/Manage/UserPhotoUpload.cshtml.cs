@@ -39,7 +39,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             //Maybe filesize limit annotation
-            public IFormFile userPhoto { get; set; }
+            public IFormFile? userPhoto { get; set; }
         }
 
         public ApplicationUser CurrentUser { get; set; }
