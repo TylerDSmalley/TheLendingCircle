@@ -11,7 +11,7 @@
             <div class="card mb-4">
                 <div class="card-header">Profile Photo Upload</div>
                 <div class="card-body">
-                    <form id="registerForm" method="post" class="needs-validation" novalidate>
+                    <form id="registerForm" method="post"  class="needs-validation" novalidate enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="mb-3">
                             <label asp-for="Input.userPhoto" class="form-label fst-italic ms-1"></label>
