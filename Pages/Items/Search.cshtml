@@ -46,19 +46,15 @@
                             <span class="text-secondary">Currently Unavailable</span>
                         }
                     </h6>
-<<<<<<< HEAD
                     <p>
-                    @if (item.Description.Length < 120) 
-                    {
-                        @item.Description;
-                    }
-                    else {
-                        @item.Description.Substring(0,120);
-                    }
-                    ...</p>
-=======
-                    <p>@item.Description</p>
->>>>>>> 9838fb0bed210802e7577b390c472c901b46b710
+                        @if (item.Description.Length < 120) 
+                        {
+                            @item.Description;
+                        }
+                        else {
+                            @item.Description.Substring(0,120);
+                        }
+                        ...</p>
                 </div>
             </div>
         </a>
@@ -76,8 +72,8 @@
             type: 'GET',
             url: '/Items/Search?handler=LoadMore',
             data: {
-                ItemCount = itemCount
-            }
+                ItemCount: itemCount
+            },
             headers: {
                 RequestVerificationToken:
                     $('input:hidden[name="__RequestVerificationToken"]').val()
