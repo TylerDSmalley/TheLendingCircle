@@ -85,6 +85,8 @@ namespace TheLendingCircle.Pages.MyCircle
         {
             if (ModelState.IsValid)
             {
+                var Loan = await _context.Loans.Include(l => l.ItemLoaned).Include(r => r.Owner).Include(r => r.Borrower).FirstOrDefaultAsync(m => m.Id == id);
+                CurrentLoan = Loan;
                 var newReview = new TheLendingCircle.Models.Review { ReviewBody = Input.ReviewBody, CreationTime = DateTime.Today, Rating = Input.Rating, Owner = CurrentLoan.Owner, Borrower = CurrentLoan.Borrower };
                 _context.Reviews.Add(newReview);
 

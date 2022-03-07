@@ -17,8 +17,8 @@
         <div class="profile-header">
             <div class="profile-header-cover" style="background-color: lightskyblue;"></div>
             <div class="profile-header-content">
-                <div class="profile-header-img rounded-circle mb-4">
-                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                <div class="">
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
                 </div>
 
                 <div class="profile-header-info">
@@ -30,22 +30,22 @@
             </div>
 
             <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link" data-toggle="tab">MY
+                <li class="nav-item mt-1"><a href="../MyItems" class="nav-link" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                <li class="nav-item mt-1"><a href="../ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
                         CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link active show"
+                <li class="nav-item mt-1"><a href="../OpenCircles" class="nav-link active show"
                         style="color: lightskyblue;" data-toggle="tab">OPEN CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                <li class="nav-item mt-1"><a href="../CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
                         REQUESTS</a></li>
-                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+                <li class="nav-item mt-1"><a href="../MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
 
-        <div class="container d-flex flex-column justify-content-evenly w-75 bg-dark">
+        <div class="container d-flex flex-column justify-content-evenly w-75">
             <h2 class="mt-2">Close Circle</h2>
             <hr />
-            <div class="container d-flex flex-column justify-content-center w-50 bg-dark">
+            <div class="container d-flex flex-column justify-content-center w-50">
                 <div class="card mb-4">
                 <div class="card-header fw-light fst-italic">Review</div>
                 <div class="card-body">
