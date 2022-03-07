@@ -19,7 +19,7 @@
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <a class="btn btn-primary" asp-page="./UserPhotoUpload" >Upload new image</a>
+                    <a class="btn btn-primary" asp-page="./UserPhotoUpload"  asp-route-id="@Model.CurrentUser.Id">Upload new image</a>
                 </div>
             </div>
         </div>
