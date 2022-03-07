@@ -48,14 +48,15 @@
 
             @foreach (var item in Model.UserItems)
             {
-                <div class="Container bg-light bd-highlight my-4">
-                    <div class="row">
-                        <div class="col col-lg-8">
-                            <div class="m-b-10"><b>My Item</b></div>
+                <div class="Container d-flex flex-column justify-content-evenly w-75">
+                    <div class="row mx-4 my-2">
+                        <div class="col col-md-7 mt-4">
+                            <div class=""><b>My Item</b></div>
                             @* //Put image filepath here *@
-                            <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 " alt="" />
+                            <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid mb-2" alt="" />
+                            <a class="btn btn-primary" asp-page="./ItemPhotoUpload" asp-route-id="@item.Id">Upload new image</a>
                         </div>
-                        <div class="col-md-4 hidden-xs hidden-sm">
+                        <div class="col-md-5 hidden-xs hidden-sm">
                             <ul class="profile-info-list">
                                 <li class="title">ITEM INFORMATION</li>
                                 <li>
