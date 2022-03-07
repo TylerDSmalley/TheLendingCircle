@@ -1,0 +1,74 @@
+﻿@page "{id:int}"
+@using Microsoft.AspNetCore.Identity
+@using TheLendingCircle.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@section Styles {
+<link rel="stylesheet" href="~/css/MyCircle.css" />
+}
+@model TheLendingCircle.Pages.MyCircle.ItemPhotoUploadModel
+@{
+}
+
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover"></div>
+            <div class="profile-header-content">
+                <div class="profile-header-img rounded-circle mb-4">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mb-4 rounded-circle" alt="" />
+                </div>
+
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</h4>
+                    <p class="m-b-sm">@User.Identity?.Name</p>
+                    <a class="btn btn-xs btn-primary mb-2" asp-area="Identity" asp-page="/Account/Manage/Index"
+                        title="Manage">Edit Profile</a>
+                </div>
+            </div>
+
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item mt-1"><a href="./MyItems" class="nav-link active show" data-toggle="tab">MY
+                        ITEMS</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
+                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE
+                        REQUESTS</a></li>
+                <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
+            </ul>
+        </div>
+
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-row align-items-center mb-0 mt-2">
+                <h2 class="mb-0">Add Item Photo</h2>
+            </div>
+            <hr />
+
+            <div class="container d-flex justify-content-center w-100">
+                <!-- Photo upload form-->
+                <div class="card mb-4">
+                    <div class="card-header">Profile Photo Upload</div>
+                    <div class="card-body">
+                        <form id="registerForm" method="post" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="mb-3">
+                                <label asp-for="Input.itemPhoto" class="form-label fst-italic ms-1"></label>
+                                <input asp-for="Input.itemPhoto" accept="image/png, image/jpeg" class="form-control" />
+                                <span asp-validation-for="Input.itemPhoto" class="text-danger"></span>
+                            </div>
+                            <div class="container d-flex justify-content-center">
+                                <button id="registerSubmit" type="submit" class="btn btn-lg btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
