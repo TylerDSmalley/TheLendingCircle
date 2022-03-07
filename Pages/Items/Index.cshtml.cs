@@ -23,7 +23,7 @@ namespace TheLendingCircle.Pages.Items
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
         public Item? CurrentItem { get; set; }
-        public ApplicationUser? Owner {get;set;} = new ApplicationUser();
+        public ApplicationUser? CurrentOwner {get;set;} = new ApplicationUser();
 
         [Required]
         [BindProperty, Display(Name = "Request Message")]
@@ -39,7 +39,7 @@ namespace TheLendingCircle.Pages.Items
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var item = _context.Items.Where(i => i.Id == Id).Include("Owner").First();
+            var item = await _context.Items.Where(i => i.Id == Id).Include("Owner").FirstAsync();
             if (item == null)
             {
                 return NotFound($"Unable to item user with ID '{Id}'.");
@@ -53,14 +53,16 @@ namespace TheLendingCircle.Pages.Items
         {
             if (!ModelState.IsValid)
             {
-                CurrentItem = _context.Items.Where(i => i.Id == Id).Include("Owner").First();
+                CurrentItem = await _context.Items.Where(i => i.Id == Id).Include("Owner").FirstAsync();
                 return Page();
             }
             _context.Request.Add(new Request() {
                 Message = RequestMessage, 
                 CreationTime = DateTime.Now, 
                 HasBeenViewed = false,
-                Borrower = await _userManager.GetUserAsync(User)
+                Owner =  CurrentItem.Owner,
+                Borrower = await _userManager.GetUserAsync(User),
+                ItemLoaned = CurrentItem
                 });
             await _context.SaveChangesAsync();
 

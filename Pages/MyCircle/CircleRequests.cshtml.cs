@@ -33,8 +33,8 @@ namespace TheLendingCircle.Pages.MyCircle
         }
         private async Task LoadAsync(string id)
         {
-            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == id).ToListAsync();
-            PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == id).ToListAsync();
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == id).Include("Owner").ToListAsync();
+            PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == id).Include("Borrower").ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()
