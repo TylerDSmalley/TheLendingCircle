@@ -46,7 +46,19 @@
                             <span class="text-secondary">Currently Unavailable</span>
                         }
                     </h6>
+<<<<<<< HEAD
+                    <p>
+                    @if (item.Description.Length < 120) 
+                    {
+                        @item.Description;
+                    }
+                    else {
+                        @item.Description.Substring(0,120);
+                    }
+                    ...</p>
+=======
                     <p>@item.Description</p>
+>>>>>>> 9838fb0bed210802e7577b390c472c901b46b710
                 </div>
             </div>
         </a>
@@ -57,11 +69,15 @@
     </div>
 
 <Script>
+    let itemCount = 3;
     function loadMore(event) {
         event.preventDefault();
         $.ajax({
             type: 'GET',
             url: '/Items/Search?handler=LoadMore',
+            data: {
+                ItemCount = itemCount
+            }
             headers: {
                 RequestVerificationToken:
                     $('input:hidden[name="__RequestVerificationToken"]').val()
@@ -69,9 +85,9 @@
         })
             .done(function (result) {
                 $.each(result, function (key, item) {
-                    console.log(item);
                     $("#search-container").append(`<div>${item.title}</div>`);
                 })
+                itemCount++;
             })
     }
 </Script>
