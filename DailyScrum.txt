@@ -129,3 +129,63 @@ N/A
 
 3. Where do I need assistance? What do I need to figure out?
 N/A
+
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-06 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+My Circle (user items) is functionally complete. 
+- My Items shows a list of items the user has available to the circle
+- Open circles displays items that the user has borrowed and loaned out. There's a button next to each loaned item where the user can close the circle and write a review. The review form should work but it's missing the logic to change the loan status from "open" to "closed". There also needs to be logic to change the item availability back to true. 
+- Closed circles displays a history of loaned, borrowed items where loan status= "closed" and borrower/owner.id == signed in user
+- Circle Requests should show any requests that where the user.id matches owner.id in the request table.
+- implemented request feature
+- owner can approve or deny a request.
+- denial deletes the request from the table.
+- approve creates a new loan record with a timestamp and a due date with the request data then removes the request from the table. 
+- My reviews shows a collection of reviews where user.id == borrow.id.
+- Added logic to display user info on Close Circle form
+- Updated layout for Close Circle form to match the other My circle tabs. 
+- Added logic to pull current loan that is to be closed and included item object attached to the loan so condition and availability can be modified upon submission.
+- Added Input Model to create custom form so I can add a review and change the item condition on the same form
+- Added logic to change loan status to closed.
+- Added logic to change item availability to true. 
+- Added layout update to display rating as stars in the review form. 
+- Created Profile photo upload page/form
+- Added logic to pull signed in user to recieve new image file path
+- Created Item photo upload page/form
+- Added logic to pull current user and and bind form inputs
+
+2. What I plan to do from this scrum to the next
+- Fix add item form - better formatting and remove unneeded fields
+- Give visual feedback for pending circles 
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- In process of implementing Photo Upload.
+
+2. What I plan to do from this scrum to the next
+- Finish photo upload
+- Time permitting, start user profile
+
+3. Where do I need assistance? What do I need to figure out?
+Possibly ask Gregory tomorrow for advice
+How to store environment variables. 
+
+--Phil--
+1. What I have done / not done since last Scrum
+- Built search bar for item title 
+- built Item list page
+- Started implementing pagination on item list page.
+
+2. What I plan to do from this scrum to the next
+- Do validation for searchbar. 
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
