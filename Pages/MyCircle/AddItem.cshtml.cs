@@ -68,7 +68,7 @@ namespace TheLendingCircle.Pages.MyCircle
                 Title = Input.Title, 
                 Description = Input.Description, 
                 Condition = Input.Condition, 
-                ItemPhotoPath = "http://bootdey.com/img/Content/avatar/avatar1.png", 
+                ItemPhotoPath = "https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png", 
                 Available = true, 
                 Owner = user
             };
