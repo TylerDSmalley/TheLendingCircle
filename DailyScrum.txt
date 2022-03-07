@@ -189,3 +189,44 @@ How to store environment variables.
 3. Where do I need assistance? What do I need to figure out?
 N/A
 
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-07 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+- Fixed add item form - better formatting and remove unneeded fields
+- Bug fixes on Circle loop
+
+2. What I plan to do from this scrum to the next
+- Finish bug testing circle path
+- Give visual feedback for pending circles 
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- S3 upload works on User profile image
+- 
+
+2. What I plan to do from this scrum to the next
+- Implement photo upload for item
+- start user profile
+- research upload on elastic beanstalk
+
+3. Where do I need assistance? What do I need to figure out?
+
+--Phil--
+1. What I have done / not done since last Scrum
+- Request is functional
+- Fixed See More links
+
+2. What I plan to do from this scrum to the next
+- Do validation for searchbar. 
+- fix load more (pagination)
+- add template for home page
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
