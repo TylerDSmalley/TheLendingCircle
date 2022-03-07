@@ -47,14 +47,14 @@
                         }
                     </h6>
                     <p>
-                    @if (item.Description.Length < 120) 
-                    {
-                        @item.Description;
-                    }
-                    else {
-                        @item.Description.Substring(0,120);
-                    }
-                    ...</p>
+                        @if (item.Description.Length < 120) 
+                        {
+                            @item.Description;
+                        }
+                        else {
+                            @item.Description.Substring(0,120);
+                        }
+                        ...</p>
                 </div>
             </div>
         </a>
@@ -72,8 +72,8 @@
             type: 'GET',
             url: '/Items/Search?handler=LoadMore',
             data: {
-                ItemCount = itemCount
-            }
+                ItemCount: itemCount
+            },
             headers: {
                 RequestVerificationToken:
                     $('input:hidden[name="__RequestVerificationToken"]').val()
