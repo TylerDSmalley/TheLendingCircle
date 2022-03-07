@@ -81,8 +81,15 @@
                             </div>
                             <div class="form-floating  col-md-4">
                                 <label asp-for="Input.ItemCondition" class="control-label"></label>
-                                <input asp-for="Input.ItemCondition" class="form-control"
-                                    value="@Model.CurrentLoan.ItemLoaned.Condition" />
+                                <select asp-for="Input.ItemCondition" class="form-select">
+                                    <option value="@Model.CurrentLoan.ItemLoaned.Condition" selected>@Model.CurrentLoan.ItemLoaned.Condition</option>
+                                    <option value="Like New">Like New</option>
+                                    <option value="Great">Great</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Used">Used</option>
+                                    <option value="Poor">Poor</option>
+                                    <option value="Barely hanging on">Barely hanging on</option>
+                                </select>
                                 <span asp-validation-for="Input.ItemCondition" class="text-danger"></span>
                             </div>
                             <div class="form-floating  col-md-4">
