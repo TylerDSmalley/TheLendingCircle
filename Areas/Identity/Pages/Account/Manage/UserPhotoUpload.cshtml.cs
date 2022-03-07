@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Transfer;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
 {
@@ -14,6 +19,11 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;
+
+        private const string bucketName = "lendingcircle";
+        private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
+        private static IAmazonS3 s3Client;
+
         public UserPhotoUploadModel(
             UserManager<ApplicationUser> userManager,
             TheLendingCircle.Data.ApplicationDbContext context)
@@ -28,13 +38,13 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             //Maybe filesize limit annotation
-            public IFormFile userPhoto { get; set; }
+            public IFormFile? userPhoto { get; set; }
         }
 
         public ApplicationUser CurrentUser { get; set; }
 
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string? id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
             if (CurrentUser == null)
@@ -44,9 +54,62 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        // public async Task<IActionResult> OnPostAsync()
-        // {
+         public async Task<IActionResult> OnPostAsync(string id)
+         {
+              if(ModelState.IsValid){
 
-        // }
+                s3Client = new AmazonS3Client("fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6","AKIAXJR27NJ66LXTY6EN",bucketRegion);
+                string imagePath = "";
+
+                if(Input.userPhoto != null){
+                    string fileExtension = Path.GetExtension(Input.userPhoto.FileName).ToLower();
+                    string filePath = Path.GetFullPath(Input.userPhoto.FileName);
+                    string[] allowedExtensions ={".jpg",".jpeg",".gif",".png"};
+                
+                if(!allowedExtensions.Contains(fileExtension)){
+                    ModelState.AddModelError(string.Empty,"Only image files (jpeg, jpg, gif, png) are allowed");
+                    return Page();
+                    }
+
+                    var invalids = System.IO.Path.GetInvalidFileNameChars();
+                    
+                    var newName = String.Join("_", Input.userPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries) ).TrimEnd('.');
+                
+                    try{
+                      var fileTransferUtility = new TransferUtility(s3Client);
+
+                        await fileTransferUtility.UploadAsync(filePath, bucketName);
+                         Console.WriteLine("Upload 1 completed");
+                     
+                    }catch(AmazonS3Exception ex){
+                            ModelState.AddModelError(string.Empty,"Amazon S3 Exception Error saving the uploaded file");
+                            return Page();
+                    }
+                    catch(Exception ex){
+                        Console.WriteLine(ex);
+                           // ModelState.AddModelError(string.Empty,"Internal Error saving the uploaded file");
+                            return Page();
+                    }
+                        imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/",newName);
+                }   
+
+                 ApplicationUser? user1 = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+                    if (user1 == null)
+                    {
+                    return NotFound();
+                    }
+                    user1.UserPhotoPath = imagePath;
+
+                     if (!ModelState.IsValid)
+                        {
+                        return Page();
+                        }
+
+                    await _context.SaveChangesAsync();
+
+            return RedirectToPage("/Index");
+            }
+            return Page();
+         }
     }
 }
