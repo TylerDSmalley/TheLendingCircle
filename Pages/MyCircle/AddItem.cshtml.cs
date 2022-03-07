@@ -41,6 +41,13 @@ namespace TheLendingCircle.Pages.MyCircle
         [Display(Name = "Condition")]
         public string Condition { get; set; }
         }
+        public int UnseenRequests { get; set; }
+        public List<Request> CircleRequests { get; set; }
+
+        private async Task LoadAsync(string id)
+        {
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
+        }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -48,6 +55,12 @@ namespace TheLendingCircle.Pages.MyCircle
             if (CurrentUser == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            await LoadAsync(CurrentUser.Id);
+            foreach(var request in CircleRequests) {
+                if(request.HasBeenViewed == false) {
+                    UnseenRequests++;
+                }
             }
             return Page();
         }

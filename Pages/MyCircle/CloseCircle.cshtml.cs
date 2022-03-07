@@ -58,6 +58,13 @@ namespace TheLendingCircle.Pages.MyCircle
 
         public ApplicationUser CurrentUser { get; set; }
         public Loan CurrentLoan { get; set; }
+        public List<Request> CircleRequests { get; set; }
+        public int UnseenRequests { get; set; }
+
+        private async Task LoadAsync(string id)
+        {
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
+        }
 
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -78,6 +85,13 @@ namespace TheLendingCircle.Pages.MyCircle
                 return NotFound("Unable to load Request with ID");
             }
             CurrentLoan = Loan;
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
+            
+            foreach(var request in CircleRequests) {
+                if(request.HasBeenViewed == false) {
+                    UnseenRequests++;
+                }
+            }
             return Page();
         }
 

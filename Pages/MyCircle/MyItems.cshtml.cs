@@ -23,9 +23,12 @@ namespace TheLendingCircle.Pages.MyCircle.MyItems
         public ApplicationUser CurrentUser { get; set; }
 
         public List<Item> UserItems { get; set; }
+        public List<Request> CircleRequests { get; set; }
+        public int UnseenRequests { get; set; }
 
         private async Task LoadAsync(string id)
         {
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
             UserItems = await _context.Items.Where(i => i.Owner.Id == id).ToListAsync();
         }
 
@@ -38,6 +41,11 @@ namespace TheLendingCircle.Pages.MyCircle.MyItems
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             await LoadAsync(user.Id);
+            foreach(var request in CircleRequests) {
+                if(request.HasBeenViewed == false) {
+                    UnseenRequests++;
+                }
+            }
             return Page();
         }
     }

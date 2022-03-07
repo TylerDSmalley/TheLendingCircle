@@ -24,8 +24,11 @@ namespace TheLendingCircle.Pages.MyCircle
 
         public List<Loan> LoanedItems { get; set; }
         public List<Loan> BorrowedItems { get; set; }
+        public List<Request> CircleRequests { get; set; }
+        public int UnseenRequests { get; set; }
         private async Task LoadAsync(string id)
         {
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
             LoanedItems = await _context.Loans.Where(l => l.Owner.Id == id && l.Status == "open").Include(l => l.Owner).Include(l => l.Borrower).Include(l => l.ItemLoaned).ToListAsync();
             BorrowedItems = await _context.Loans.Where(l => l.Borrower.Id == id && l.Status == "open").Include(l => l.Owner).Include(l => l.Borrower).Include(l => l.ItemLoaned).ToListAsync();
         }
@@ -43,6 +46,11 @@ namespace TheLendingCircle.Pages.MyCircle
                 loan.HasBeenViewed = true;
             }
             await _context.SaveChangesAsync();
+            foreach(var request in CircleRequests) {
+                if(request.HasBeenViewed == false) {
+                    UnseenRequests++;
+                }
+            }
             return Page();
         }
     }

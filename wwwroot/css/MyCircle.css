@@ -155,6 +155,10 @@ body .fc-widget-header a {
     height: 7rem;
     border: #fff solid thick;
 }
+.unseen {
+    background-color: red;
+    color: #fff;
+}
 .checked {
     color: orange;
 }
