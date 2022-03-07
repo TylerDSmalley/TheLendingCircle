@@ -17,7 +17,8 @@
             <div class="profile-header-cover" style="background-color: lightsalmon;"></div>
             <div class="profile-header-content">
                 <div class="">
-                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3"
+                        alt="" />
                 </div>
 
                 <div class="profile-header-info">
@@ -47,21 +48,21 @@
             </div>
             <hr />
 
-            <div class="col-xl-8">
-                <div class="card mb-4">
+            <div class="d-flex flex-column align-items-center w-100 mb-0 mt-2">
+                <div class="card w-50 mb-4">
                     <div class="card-header">Open Circle</div>
                     <div class="card-body">
                         <form id="registerForm" method="post" class="w-100 row g-4 needs-validation" novalidate>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-floating  col-md-4">
-                                <input type="date" asp-for="Input.DueDate" class="form-control" aria-required="true"/>
+                            <div class="form-floating  col-md-12">
+                                <input type="date" asp-for="Input.DueDate" class="form-control" aria-required="true" />
                                 <label asp-for="Input.DueDate" class="form-label fst-italic ms-1"></label>
                                 <span asp-validation-for="Input.DueDate" class="text-danger"></span>
                             </div>
-                            
+
                             <div class="col-12">
-                                <button id="loanSubmit" type="submit"
-                                    class="w-100 btn btn-lg btn-primary">Open Circle</button>
+                                <button id="loanSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Open
+                                    Circle</button>
                             </div>
                         </form>
                     </div>
@@ -69,4 +70,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
