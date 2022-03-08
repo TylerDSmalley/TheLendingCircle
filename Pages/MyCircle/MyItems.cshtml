@@ -17,7 +17,8 @@
             <div class="profile-header-cover" style="background-color: #895ff0;"></div>
             <div class="profile-header-content">
                 <div class="">
-                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3"
+                        alt="" />
                 </div>
 
                 <div class="ms-3">
@@ -31,12 +32,15 @@
             <ul class="profile-header-tab nav nav-tabs">
                 <li class="nav-item mt-1"><a href="./MyItems" class="nav-link active show" data-toggle="tab">MY
                         ITEMS</a></li>
-                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED
+                        CIRCLES</a></li>
+                <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
+                </li>
                 <li class="nav-item mt-1">
-                    @if(@Model.UnseenRequests > 0)
+                    @if (@Model.UnseenRequests > 0)
                     {
-                        <p class="float-start m-0 p-0 bg-danger text-white rounded-circle fs-6 fw-light">  &nbsp @Model.UnseenRequests  &nbsp </p>
+                        <p class="float-start m-0 p-0 bg-danger text-white rounded-circle fs-6 fw-light"> &nbsp
+                            @Model.UnseenRequests &nbsp </p>
                     }
                     <a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a>
                 </li>
@@ -47,21 +51,22 @@
         <div class="container d-flex flex-column justify-content-evenly w-75">
             <div class="d-flex flex-row align-items-center mb-0 mt-2">
                 <h2 class="mb-0">My Items in Circulation</h2>
-            <p class="ms-3 mb-0">
-                <a class="btn btn-xs btn-primary my-2" asp-area="" asp-page="./AddItem">Add Item</a>
-            </p>
+                <p class="ms-3 mb-0">
+                    <a class="btn btn-xs btn-primary my-2" asp-area="" asp-page="./AddItem">Add Item</a>
+                </p>
             </div>
-            <hr/>
+            <hr />
 
             @foreach (var item in Model.UserItems)
             {
-                <div class="Container d-flex flex-column justify-content-evenly w-75">
+                <div class="Container bg-white p-3 rounded-3 d-flex flex-column justify-content-evenly w-100">
                     <div class="row mx-4 my-2">
                         <div class="col col-md-7 mt-4">
                             <div class=""><b>My Item</b></div>
                             @* //Put image filepath here *@
                             <img src="@item.ItemPhotoPath" class="img-fluid mb-2" alt="" />
-                            <a class="btn btn-primary" asp-page="./ItemPhotoUpload" asp-route-id="@item.Id">Upload new image</a>
+                            <a class="btn btn-primary" asp-page="./ItemPhotoUpload" asp-route-id="@item.Id">Upload new
+                                image</a>
                         </div>
                         <div class="col-md-5 hidden-xs hidden-sm">
                             <ul class="profile-info-list">
@@ -90,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <hr/>
+                <hr />
             }
         </div>
     </div>

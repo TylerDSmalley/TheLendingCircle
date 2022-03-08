@@ -10,7 +10,7 @@
 <div class="container">
     <div id="content" class="content p-0">
         <div class="profile-header">
-            <div class="profile-header-cover"></div>
+            <div class="profile-header-cover" style="background-color: #895ff0;"></div>
             <div class="profile-header-content">
                 <div class="">
                     <img src="@Model.curUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
@@ -19,26 +19,94 @@
                 <div class="ms-3">
                     <h4 class="mb-1">@Model.curUser.FirstName @Model.curUser.LastName</h4>
                     <h6 class="mb-1">@Model.curUser.PostalCode</h6>
-                    <p class="mb-2">@User.Identity?.Name</p>
+                    <p class="mb-2">@Model.curUser.UserName</p>
+                    <p>
+                    <div class="field">Average Rating: @Model.curUser.AvgRating / 5</div>
+                        @{
+                            switch ((int)@Model.curUser.AvgRating)
+                            {
+                                case 0:
+                                    <text>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                                case 1:
+                                    <text>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                                case 2:
+                                    <text>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                                case 3:
+                                    <text>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                                case 4:
+                                    <text>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                                case 5:
+                                    <text>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    </text>
+                                    break;
+                                default:
+                                    <text>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    </text>
+                                    break;
+                            }
+                        }
+                    </p>
                 </div>
             </div>
         </div>
 
-            <div class="container d-flex flex-column justify-content-evenly w-75">
-            <div class="d-flex flex-row align-items-center mb-0 mt-2">
-                <h2 class="mb-0">My Overall Rating</h2>
-            <h5 class="ms-3 mb-0">
-                @Model.curUser.AvgRating / 5
-            </h5>
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-column align-items-center mb-0 mt-2 text-center">
+                <h2 class="mb-0">@Model.curUser.FirstName's Reviews</h2>
             </div>
-            <hr/>
+            <hr />
 
             @foreach (var review in Model.userReviews)
             {
                 <div class="Container d-flex flex-row justify-content-center my-4">
                     <div class="card w-50">
                         <div class="card-header">
-                            Review 
+                            Review
                         </div>
                         <div class="card-body p-2">
                             <ul class="profile-info-list p-2">
@@ -50,73 +118,73 @@
                                 <li>
                                     <div class="field">Rating given:</div>
                                     @{
-                                        switch(@review.Rating)
+                                        switch (@review.Rating)
                                         {
-                                        case 0:
-                                            <text>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;
-                                        case 1:
-                                            <text>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;
-                                        case 2:
-                                            <text>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;
-                                        case 3:
-                                            <text>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;
-                                        case 4:
-                                            <text>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;  
-                                        case 5:
-                                            <text>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                            </text>
-                                        break;
-                                        default:
-                                            <text>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            </text>
-                                        break;                   
+                                            case 0:
+                                                <text>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                            case 1:
+                                                <text>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                            case 2:
+                                                <text>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                            case 3:
+                                                <text>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                            case 4:
+                                                <text>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                            case 5:
+                                                <text>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                </text>
+                                                break;
+                                            default:
+                                                <text>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </text>
+                                                break;
+                                        }
                                     }
-                                }
                                 </li>
                             </ul>
                         </div>
@@ -129,4 +197,4 @@
             }
         </div>
     </div>
-</div>    
+</div>
