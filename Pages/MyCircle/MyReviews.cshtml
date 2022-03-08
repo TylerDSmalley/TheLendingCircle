@@ -55,8 +55,8 @@
 
             @foreach (var review in Model.Reviews)
             {
-                <div class="Container d-flex flex-row justify-content-evenly my-4">
-                    <div class="card">
+                <div class="Container d-flex flex-row justify-content-center my-4">
+                    <div class="card w-50">
                         <div class="card-header">
                             Review by: <a class="nav-item" asp-area="" asp-route-id="@review.Borrower.Id"
                             asp-page="#../Users/UserProfile">@review.Owner.Email</a>

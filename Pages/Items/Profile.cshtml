@@ -27,16 +27,16 @@
             <div class="container d-flex flex-column justify-content-evenly w-75">
             <div class="d-flex flex-row align-items-center mb-0 mt-2">
                 <h2 class="mb-0">My Overall Rating</h2>
-            <p class="ms-3 mb-0">
-               @*//Put aggregate rating here *@
-            </p>
+            <h5 class="ms-3 mb-0">
+                @Model.curUser.AvgRating / 5
+            </h5>
             </div>
             <hr/>
 
             @foreach (var review in Model.userReviews)
             {
-                 <div class="Container d-flex flex-row justify-content-evenly my-4">
-                    <div class="card">
+                <div class="Container d-flex flex-row justify-content-center my-4">
+                    <div class="card w-50">
                         <div class="card-header">
                             Review 
                         </div>
