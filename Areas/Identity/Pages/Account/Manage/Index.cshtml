@@ -62,7 +62,8 @@
                             <span asp-validation-for="Input.City" class="text-danger"></span>
                         </div>
                         <div class="form-floating  col-md-2">
-                            <select asp-for="Input.Province" class="form-select" value="@Model.CurrentUser.Province">
+                            <select asp-for="Input.Province" class="form-select">
+                                <option value="@Model.CurrentUser.Province">@Model.CurrentUser.Province</option>
                                 <option value="NL">NL</option>
                                 <option value="PE">PE</option>
                                 <option value="NS">NS</option>

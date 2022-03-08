@@ -7,8 +7,8 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+        <li class="nav-item dropdown text-white">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
                 Hello @User.Identity?.Name
             </a>
@@ -17,12 +17,15 @@
                 <li><a class="dropdown-item nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a></li>
                 <li><a class="dropdown-item nav-link text-dark" asp-area="" asp-page="/MyCircle/MyItems" title="MyCircle">My Circle</a></li>
                 <hr />
+                @if (User.IsInRole("Admin"))
+                {
                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Item/Index">Item List</a></li>
                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Loan/Index">Loan List</a></li>
                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Request/Index">Request List</a></li>
                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/Review/Index">Review List</a></li>
                 <li><a class="dropdown-item" asp-area="" asp-page="/Admin/User/Index">User List</a></li>
                 <hr />
+                }
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
                     asp-route-returnUrl='@Url.Page("/", new { area = "" })' method="post">

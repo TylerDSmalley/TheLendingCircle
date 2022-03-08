@@ -66,6 +66,19 @@ namespace TheLendingCircle.Pages.MyCircle
             CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
         }
 
+        private double calculateAggRating(List<Review> AggReviewList)
+        {
+            List<Review> ratingsList = AggReviewList;
+            double ratingsCount = ratingsList.Count();
+            double ratingsTotal = 0;
+            foreach (var review in ratingsList)
+            {
+                ratingsTotal = ratingsTotal + review.Rating;
+            }
+            double newAggRating = ratingsTotal / ratingsCount;
+            return newAggRating;
+        }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -86,9 +99,11 @@ namespace TheLendingCircle.Pages.MyCircle
             }
             CurrentLoan = Loan;
             CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
-            
-            foreach(var request in CircleRequests) {
-                if(request.HasBeenViewed == false) {
+
+            foreach (var request in CircleRequests)
+            {
+                if (request.HasBeenViewed == false)
+                {
                     UnseenRequests++;
                 }
             }
@@ -99,6 +114,7 @@ namespace TheLendingCircle.Pages.MyCircle
         {
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(User);
                 var Loan = await _context.Loans.Include(l => l.ItemLoaned).Include(r => r.Owner).Include(r => r.Borrower).FirstOrDefaultAsync(m => m.Id == id);
                 CurrentLoan = Loan;
                 var newReview = new TheLendingCircle.Models.Review { ReviewBody = Input.ReviewBody, CreationTime = DateTime.Today, Rating = Input.Rating, Owner = CurrentLoan.Owner, Borrower = CurrentLoan.Borrower };
@@ -117,10 +133,24 @@ namespace TheLendingCircle.Pages.MyCircle
                     return NotFound();
                 }
                 returnItem.Available = true;
-                if(returnItem.Condition != Input.ItemCondition) {
+                if (returnItem.Condition != Input.ItemCondition)
+                {
                     returnItem.Condition = Input.ItemCondition;
                 }
+                await _context.SaveChangesAsync();
 
+                if (Loan.Borrower.AvgRating == null || Loan.Borrower.AvgRating == 0)
+                {
+                    Loan.Borrower.AvgRating = newReview.Rating;
+                }
+                else
+                {
+                    List<Review> AggReviewList = await _context.Reviews.Where(r => r.Borrower.Id == user.Id).Include(r => r.Borrower).ToListAsync();
+                    if (AggReviewList != null)
+                    {
+                        Loan.Borrower.AvgRating = calculateAggRating(AggReviewList);
+                    }
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./ClosedCircles");
             }
