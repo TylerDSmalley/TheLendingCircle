@@ -59,17 +59,15 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         {
             if (ModelState.IsValid)
             {
-
-
                 s3Client = new AmazonS3Client(bucketRegion);
                 string imagePath = "";
 
                 if (Input.userPhoto != null)
                 {
                     string fileExtension = Path.GetExtension(Input.userPhoto.FileName).ToLower();
-                    string filePath = Path.GetFullPath(Input.userPhoto.FileName);
+                    //string filePath = Path.GetFullPath(Input.userPhoto.FileName);
                     
-                    Console.WriteLine(filePath);
+                   // Console.WriteLine(filePath);
                     string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
                     if (!allowedExtensions.Contains(fileExtension))

@@ -52,11 +52,11 @@
                 <div class="card mb-4">
                     <div class="card-header">Profile Photo Upload</div>
                     <div class="card-body">
-                        <form id="registerForm" method="post" class="needs-validation" novalidate>
+                        <form id="registerForm" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="mb-3">
                                 <label asp-for="Input.itemPhoto" class="form-label fst-italic ms-1"></label>
-                                <input asp-for="Input.itemPhoto" accept="image/png, image/jpeg" class="form-control" />
+                                <input type="file" asp-for="Input.itemPhoto" accept="image/png, image/jpeg" class="form-control" />
                                 <span asp-validation-for="Input.itemPhoto" class="text-danger"></span>
                             </div>
                             <div class="container d-flex justify-content-center">

@@ -33,7 +33,13 @@
                         ITEMS</a></li>
                 <li class="nav-item mt-1"><a href="./ClosedCircles" class="nav-link" data-toggle="tab">CLOSED CIRCLES</a></li>
                 <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a></li>
-                <li class="nav-item mt-1"><a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                <li class="nav-item mt-1">
+                    @if(@Model.UnseenRequests > 0)
+                    {
+                        <p class="float-start m-0 p-0 bg-danger text-white rounded-circle fs-6 fw-light">  &nbsp @Model.UnseenRequests  &nbsp </p>
+                    }
+                    <a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a>
+                </li>
                 <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
@@ -54,7 +60,7 @@
                         <div class="col col-md-7 mt-4">
                             <div class=""><b>My Item</b></div>
                             @* //Put image filepath here *@
-                            <img src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png" class="img-fluid mb-2" alt="" />
+                            <img src="@item.ItemPhotoPath" class="img-fluid mb-2" alt="" />
                             <a class="btn btn-primary" asp-page="./ItemPhotoUpload" asp-route-id="@item.Id">Upload new image</a>
                         </div>
                         <div class="col-md-5 hidden-xs hidden-sm">
