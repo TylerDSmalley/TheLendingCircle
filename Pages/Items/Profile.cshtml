@@ -21,93 +21,88 @@
                     <h6 class="mb-1">@Model.curUser.PostalCode</h6>
                     <p class="mb-2">@Model.curUser.UserName</p>
                     <p>
-                    <div class="field">Average Rating: @Model.curUser.AvgRating / 5</div>
-                        @{
-                            switch ((int)@Model.curUser.AvgRating)
-                            {
-                                case 0:
-                                    <text>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
-                                case 1:
-                                    <text>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
-                                case 2:
-                                    <text>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
-                                case 3:
-                                    <text>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
-                                case 4:
-                                    <text>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
-                                case 5:
-                                    <text>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    </text>
-                                    break;
-                                default:
-                                    <text>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    </text>
-                                    break;
+                        @if (Model.curUser.AvgRating > 0)
+                        {
+                        <div class="field">Average Rating: @Model.curUser.AvgRating / 5</div>
+                        switch ((int)@Model.curUser.AvgRating)
+                        {
+                            case 0:
+                                <text>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
+                            case 1:
+                                <text>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
+                            case 2:
+                                <text>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
+                            case 3:
+                                <text>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
+                            case 4:
+                                <text>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
+                            case 5:
+                                <text>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                </text>
+                                break;
+                            default:
+                                <text>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                </text>
+                                break;
                             }
+                        }
+                        else
+                        {
+                            <div class="field">Average Rating: <em>No Rating Yet</em></div>
                         }
                     </p>
                 </div>
             </div>
         </div>
 
-            <div class="container d-flex flex-column justify-content-evenly w-75">
-            <div class="d-flex flex-row align-items-center mb-0 mt-2">
-                <h2 class="mb-0">My Overall Rating</h2>
-                @if(Model.curUser.AvgRating > 0){
-                     <h5 class="ms-3 mb-0">
-                    @Model.curUser.AvgRating / 5
-                     </h5>
-                }else{
-                    <h5 class="ms-3 mb-0">
-                    No Rating Yet
-                     </h5>
-                }
-               
+        <div class="container d-flex flex-column justify-content-evenly w-75">
+            <div class="d-flex flex-column align-items-center mb-0 mt-2 text-center">
+                <h2 class="mb-0">@Model.curUser.FirstName's Reviews</h2>
             </div>
             <hr />
 
