@@ -14,7 +14,7 @@
                 <a class="text-decoration-none" asp-page="/Items/Index" asp-route-id="@item.Id">
                     <div
                     class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
-                        <img class="p-0 roundedcorners container-fluid mb-4"
+                        <img class="p-0 roundedcorners container-fluid mb-4 img-preview"
                         src="@item.ItemPhotoPath" alt="item" />
                         <div class="mx-1">
                             <h5>@item.Title</h5>
@@ -37,7 +37,7 @@
         }
     </div>
     <div style="width:300px" class="mx-auto">
-        <a asp-page="/Items/Search" class="btn btn-primary container-fluid px-5">See more</a>
+        <a asp-page="/Items/Search" style="background-color:#6171FF" class="roundedcorners btn btn-primary container-fluid px-5">See more</a>
     </div>
 </div>
 

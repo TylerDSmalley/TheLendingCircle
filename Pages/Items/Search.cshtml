@@ -19,7 +19,7 @@
         <a asp-page="/Items/Index" asp-route-id="@item.Id">
             <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
                 <div>
-                    <img class="roundedcorners" width=200 height=200 src="@item.ItemPhotoPath">
+                    <img class="roundedcorners" style="object-fit: cover;" width=200 height=200 src="@item.ItemPhotoPath">
                 </div>
                 <div class="my-1 container-fluid">
                     <h4>@item.Title</h4>
@@ -54,7 +54,7 @@
 @if (Model.ItemsList.Count > 0)
 {
     <div style="width:300px" id="LoadMoreItems" class="mx-auto">
-        <button onclick="loadMore(event)" class="btn btn-primary container-fluid px-5">Load More</button>
+        <button onclick="loadMore(event)" style="background-color:#6171FF;" class="roundedcorners btn btn-primary container-fluid px-5">Load More</button>
     </div>
 }
 
@@ -83,7 +83,7 @@
                                 <a href="/Items/${item.id}">
                                     <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
                                         <div>
-                                            <img class="roundedcorners" width=200 height=200
+                                            <img style="object-fit: cover;" class="roundedcorners" width=200 height=200
                                             src="${item.itemPhotoPath}">
                                         </div>
                                         <div class="my-1 container-fluid">
