@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TheLendingCircle.Models;
 using TheLendingCircle.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace TheLendingCircle.Pages;
 
@@ -11,8 +13,8 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
 
     [BindProperty]
-    public string? SearchString {get;set;}
-    public List<Item> ItemsList {get;set;} = new List<Item>();
+    public string? SearchString { get; set; }
+    public List<Item> ItemsList { get; set; } = new List<Item>();
     public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
     {
         _logger = logger;
@@ -23,7 +25,15 @@ public class IndexModel : PageModel
         ItemsList = _context.Items.Take(6).ToList();
     }
 
-    public IActionResult OnPost() {
+    public IActionResult OnPost()
+    {
+        if (!string.IsNullOrEmpty(SearchString)) {
+            SearchString = Uri.EscapeDataString(SearchString);
+        }
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
         if (string.IsNullOrEmpty(SearchString)) return RedirectToPage("./Items/Search/");
         return Redirect("/Items/Search?query=" + SearchString);
     }

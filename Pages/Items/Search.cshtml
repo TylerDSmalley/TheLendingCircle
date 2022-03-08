@@ -2,22 +2,10 @@
 @model TheLendingCircle.Pages.Items.SearchModel
 @{
     ViewData["Title"] = "Search Page";
+
 }
 <div class="container" id="search-container">
-    <div class="input-group d-flex my-3 align-items-center">
-        <form class="w-100" method="post">
-            <input asp-for="SearchString" type="text" class="rounded-pill w-100 form-control"
-                placeholder="Search for an item">
-            <button type="submit" style="position:absolute;right:12px;bottom: 7px;z-index:10;"
-                class="rounded-circle btn" type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-            </button>
-            </input>
-        </form>
-    </div>
+    <partial name="../Shared/SearchPartial" model=@Model.SearchString />
 
     <h1>@(string.IsNullOrEmpty(@Model.Query) ? "" : $"Showing results for '{Model.Query}'")</h1>
 
@@ -31,7 +19,7 @@
         <a asp-page="/Items/Index" asp-route-id="@item.Id">
             <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
                 <div>
-                    <img class="roundedcorners" width=200 height=200 src="https://tonsmb.org/wp-content/uploads/2014/03/default-placeholder.png">
+                    <img class="roundedcorners" width=200 height=200 src="@item.ItemPhotoPath">
                 </div>
                 <div class="my-1 container-fluid">
                     <h4>@item.Title</h4>
@@ -47,12 +35,15 @@
                         }
                     </h6>
                     <p>
-                        @if (item.Description.Length < 120) 
+                        @if (item.Description.Length < 120)
                         {
-                            @item.Description;
+                            @item.Description
+                            ;
                         }
-                        else {
-                            @item.Description.Substring(0,120);
+                        else
+                        {
+                            @item.Description.Substring(0,120)
+                            ;
                         }
                         ...</p>
                 </div>
@@ -60,19 +51,24 @@
         </a>
     }
 </div>
-    <div style="width:300px" class="mx-auto">
-        <button onclick="loadMore(event)" class="btn btn-primary container-fluid px-5">Load More</a>
+@if (Model.ItemsList.Count > 0)
+{
+    <div style="width:300px" id="LoadMoreItems" class="mx-auto">
+        <button onclick="loadMore(event)" class="btn btn-primary container-fluid px-5">Load More</button>
     </div>
+}
 
 <Script>
     let itemCount = 3;
+    let SearchQuery = @Html.Raw(Json.Serialize(Model.Query));
     function loadMore(event) {
         event.preventDefault();
         $.ajax({
             type: 'GET',
             url: '/Items/Search?handler=LoadMore',
             data: {
-                ItemCount: itemCount
+                ItemCount: itemCount,
+                SearchQuery
             },
             headers: {
                 RequestVerificationToken:
@@ -80,10 +76,44 @@
             }
         })
             .done(function (result) {
-                $.each(result, function (key, item) {
-                    $("#search-container").append(`<div>${item.title}</div>`);
-                })
-                itemCount++;
+                if (result.success) {
+                    $.each(result.data, function (key, item) {
+                        console.log(result)
+                        $("#search-container").append(`
+                                <a href="/Items/${item.id}">
+                                    <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
+                                        <div>
+                                            <img class="roundedcorners" width=200 height=200
+                                            src="${item.itemPhotoPath}">
+                                        </div>
+                                        <div class="my-1 container-fluid">
+                                            <h4>${item.title}</h4>
+                                            <h6><a href="/Profile/${item.id}">${item.owner.userName}</a></h6>
+                                            <h6>
+                                                ${item.available ?
+                                `<span class="text-success">Currently Available</span>` :
+                                `<span class="text-secondary">Currently Unavailable</span>`
+                            }
+                                            </h6>
+                                            <p>
+                                                ${item.description.length < 120 ?
+                                item.description :
+                                item.description.Substring(0, 120)
+                            }
+                                                ...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                        `);
+                    })
+                    itemCount += 3;
+                } else {
+                    $("#LoadMoreItems").remove();
+                }
             })
     }
 </Script>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

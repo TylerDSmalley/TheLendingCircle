@@ -1,11 +1,16 @@
-﻿    <div class="input-group d-flex my-3 align-items-center">
+﻿@using TheLendingCircle.Pages.Items
+@model SearchModel
+    <div class="input-group d-flex my-3 align-items-center">
         <form class="w-100" method="post">
-            <button type="submit" style="position:absolute;right:12px;bottom: 7px;z-index:10;" class="rounded-circle btn"
-                type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-search" viewBox="0 0 16 16">
+            <input asp-for="@Model.SearchString" type="text" class="rounded-pill w-100 form-control"
+                placeholder="Search for an item">
+            <button type="submit" style="position:absolute;right:12px;bottom: 7px;z-index:10;"
+                class="rounded-circle btn" type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path
                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
             </button>
+            </input>
         </form>
     </div>

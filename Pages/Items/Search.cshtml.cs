@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
 using TheLendingCircle.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace TheLendingCircle.Pages.Items
 {
@@ -29,6 +30,10 @@ namespace TheLendingCircle.Pages.Items
 
         public IActionResult OnPost()
         {
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                SearchString = Uri.EscapeDataString(SearchString);
+            }
             return Redirect("./Search?query=" + SearchString);
         }
 
@@ -45,23 +50,28 @@ namespace TheLendingCircle.Pages.Items
             else
             {
                 ItemsList = _context.Items
-                    .Skip(itemCount)
-                    .Take(3)
                     .Where(item =>
                         item.Title
                             .ToLower()
                             .Contains(Query.ToLower())
                         )
+                    .Skip(itemCount)
+                    .Take(3)
                     .Include("Owner")
                     .ToList();
             }
         }
 
 
-        public JsonResult OnGetLoadMore(int itemCount)
+        public JsonResult OnGetLoadMore(int itemCount, string searchQuery)
         {
+            Query = searchQuery;
             GetItems(itemCount);
-            return new JsonResult(ItemsList);
+            if (ItemsList.Count() < 1)
+            {
+                return new JsonResult(new { Success = false });
+            }
+            return new JsonResult(new { Success = true, Data = ItemsList });
         }
     }
 }
