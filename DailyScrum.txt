@@ -197,8 +197,8 @@ N/A
 - Bug fixes on Circle loop
 
 2. What I plan to do from this scrum to the next
-- Finish bug testing circle path
-- Give visual feedback for pending circles 
+- Finished bug testing circle path
+- Gave visual feedback for pending circles
 
 
 3. Where do I need assistance? What do I need to figure out?
@@ -225,6 +225,48 @@ N/A
 - Do validation for searchbar. 
 - fix load more (pagination)
 - add template for home page
+
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-07 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+- Finished bug testing circle path
+- Gave visual feedback for pending circles
+
+2. What I plan to do from this scrum to the next
+- Add some visual styling to site. (logo)
+- Bug Test
+- take a look at average rating in review submission
+- Fix image sizing in mycircle pages
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- Implemented photo upload for item
+- Launched site on beanstalk
+
+2. What I plan to do from this scrum to the next
+- start/finish user profile
+
+
+3. Where do I need assistance? What do I need to figure out?
+
+--Phil--
+1. What I have done / not done since last Scrum
+- fixed load more (pagination)
+- Did validation for searchbar
+
+2. What I plan to do from this scrum to the next
+- Hide request form to owner of item
+- Hide request form if request was already submitted
+- Give visual feedback that request was sent
+- Add please log in to request bar if user is not logged in
 
 
 3. Where do I need assistance? What do I need to figure out?
