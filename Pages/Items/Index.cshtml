@@ -23,7 +23,7 @@
                 <span class="text-secondary">Currently Unavailable</span>
             }
         </h3>
-        <h5><a asp-page="/Profile" asp-route-id="@Model.CurrentItem.Id">@Model.CurrentItem.Owner</a></h5>
+        <h5><a asp-page="Profile" asp-route-id="@Model.CurrentItem.Id">@Model.CurrentItem.Owner</a></h5>
         <p>@Model.CurrentItem.Description</p>
 
         @if (SignInManager.IsSignedIn(User))
