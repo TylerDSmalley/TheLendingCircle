@@ -53,7 +53,7 @@ namespace TheLendingCircle.Pages.MyCircle
             return Page();
         }
 
-     public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync(int id)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace TheLendingCircle.Pages.MyCircle
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToPage("./Index");
+                return RedirectToPage("./MyItems");
             }
             return Page();
         }
