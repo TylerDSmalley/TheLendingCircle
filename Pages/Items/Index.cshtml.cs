@@ -120,10 +120,9 @@ namespace TheLendingCircle.Pages.Items
 
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Please login to respond to the following request:\n" + "\n" +RequestMessage;  
+            string mailbody = "Please login to respond to the following request:<br/><br/>" + RequestMessage;  
             message.Subject = "You have a new Lending Circle request!";  
             message.Body = mailbody;  
-           // message.BodyEncoding = Encoding.UTF8;  
             message.IsBodyHtml = true;  
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
             System.Net.NetworkCredential basicCredential1 = new  System.Net.NetworkCredential("thelendingcircle@gmail.com", "gawcPO4TPwaoy5vT");  
