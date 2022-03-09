@@ -4,7 +4,40 @@
     Layout = "_Layout";
     ViewData["Title"] = "Home page";
 }
-<div class="container">
+<div>
+    <div class="d-flex justify-content-between mb-5">
+        <img src="/img/Banner1.png" style="max-height:360px;" />
+        <img src="/img/Banner2.png" style="max-height:360px;" />
+    </div>
+    <div class="d-flex gap-5 mb-5">
+        <div class="bg-light text-center border roundedcorners ">
+            <div class="px-2 py-4">
+                <h4><b>Insurance Policy</b></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit tempor quam, auctor commodo dui
+                    ultrices at. Vivamus congue facilisis ultrices. Nunc ut malesuada enim. Nullam mattis leo ac sodales
+                    mollis.
+                </p>
+            </div>
+        </div>
+        <div class="bg-light text-center border roundedcorners ">
+            <div class="px-2 py-4">
+                <h4><b>We create communities</b></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit tempor quam, auctor commodo dui
+                    ultrices at. Vivamus congue facilisis ultrices. Nunc ut malesuada enim. Nullam mattis leo ac sodales
+                    mollis.
+                </p>
+            </div>
+        </div>
+        <div class="bg-light text-center border roundedcorners ">
+            <div class="px-2 py-4">
+                <h4><b>Appointment based</b></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit tempor quam, auctor commodo dui
+                    ultrices at. Vivamus congue facilisis ultrices. Nunc ut malesuada enim. Nullam mattis leo ac sodales
+                    mollis.
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="row row-cols-2 row-cols-lg-5 justify-content-between">
         @foreach (var item in @Model.ItemsList)
         {
@@ -12,8 +45,8 @@
                 <a class="text-decoration-none" asp-page="/Items/Index" asp-route-id="@item.Id">
                     <div
                     class="mx-auto shadow-sm container-fluid py-3 bg-white roundedcorners border border-1 border-light">
-                        <img class="p-0 roundedcorners container-fluid mb-4 img-preview"
-                        src="@item.ItemPhotoPath" alt="item" />
+                        <img class="p-0 roundedcorners container-fluid mb-4 img-preview" src="@item.ItemPhotoPath"
+                        alt="item" />
                         <div class="mx-1">
                             <h5>@item.Title</h5>
                             <h6 class="text-secondary"><b>@item.Condition</b></h6>
@@ -22,7 +55,7 @@
                 </a>
                 @if (item.Available)
                 {
-                    <div class="border-light rounded-circle link-success"
+                    <div class="borderColor rounded-circle link-success"
                 style="border-style:solid;border-width:10px;position: relative;bottom: 40px;right: -82px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                     class="bi bi-check-circle" viewBox="0 0 16 16">
@@ -35,7 +68,8 @@
         }
     </div>
     <div style="width:300px" class="mx-auto">
-        <a asp-page="/Items/Search" style="background-color:#6171FF" class="roundedcorners btn btn-primary container-fluid px-5">See more</a>
+        <a asp-page="/Items/Search" style="background-color:#6171FF"
+            class="roundedcorners btn btn-primary container-fluid px-5">See more</a>
     </div>
 </div>
 

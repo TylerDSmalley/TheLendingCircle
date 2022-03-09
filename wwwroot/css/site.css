@@ -2,11 +2,26 @@ html {
   font-size: 14px;
 }
 
+body, a {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: .5px;
+  line-height: 1.7em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.3px;
+}
+
 .navbar {
   position: relative; /* Set the navbar to fixed position */
   top: 0;
   width: 100%;
   z-index: 5000;
+}
+
+.borderColor {
+  border-color:#F2F6FC;
 }
 
 

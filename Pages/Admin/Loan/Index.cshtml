@@ -29,8 +29,10 @@
         </tr>
     </thead>
     <tbody>
+@{int idx = 0;}
 @foreach (var item in Model.Loan) {
-        <tr>
+        string color = idx % 2 == 0 ? "background-color:rgb(121,114,207,.1)" : "0";
+        <tr style="@color">
             <td>
                 @Html.DisplayFor(modelItem => item.CreationTime)
             </td>
@@ -49,6 +51,7 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
+        idx++;
 }
     </tbody>
 </table>

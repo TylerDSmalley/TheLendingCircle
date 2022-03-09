@@ -5,12 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TheLendingCircle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="false" />
     <link rel="stylesheet" href="~/TheLendingCircle.styles.css" asp-append-version="true" />
 </head>
 
-<body class="bg-light">
+<body class="bgColor">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navColor border-bottom box-shadow mb-3">
             <div class="container">
@@ -20,10 +26,11 @@
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                @* searchbar *@
                 <div class="input-group d-flex my-3 align-items-center">
                     <form class="w-100">
-                        <input name="SearchTerm" value="@ViewData["SearchTerm"]" asp-route-searchTerm="./Items/Search/" class="rounded-pill w-100 form-control"
-                            placeholder="Search for an item">
+                        <input name="SearchTerm" value="@ViewData["SearchTerm"]" asp-route-searchTerm="./Items/Search/"
+                            class="rounded-pill w-100 form-control" placeholder="Search for an item">
                         <button type="submit" formaction="/Items/Search"
                             style="position:absolute;right:12px;bottom: 7px;z-index:10; color:#8C48E0;"
                             class="rounded-circle btn" type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -41,7 +48,7 @@
             </div>
         </nav>
     </header>
-    <div class="container bgColor rounded-3 mb-3">
+    <div class="container rounded-3 mb-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

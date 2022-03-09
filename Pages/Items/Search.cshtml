@@ -21,7 +21,7 @@
                 </div>
                 <div class="my-1 container-fluid">
                     <h4><a asp-page="/Items/Index" asp-route-id="@item.Id">@item.Title</a></h4>
-                    <h6>@item.Owner</h6>
+                    <h6><a asp-page="/Items/Profile" asp-route-id="@item.Owner.Email">@item.Owner</a></h6>
                     <h6>
                         @if (item.Available)
                         {
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="my-1 container-fluid">
                                             <h4>${item.title}</h4>
-                                            <h6><a href="/Profile/${item.id}">${item.owner.userName}</a></h6>
+                                            <h6><a href="/Items/Profile/${item.owner.userName}">${item.owner.userName}</a></h6>
                                             <h6>
                                                 ${item.available ?
                                 `<span class="text-success">Currently Available</span>` :
