@@ -4,6 +4,7 @@ using TheLendingCircle.Models;
 using TheLendingCircle.Data;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
+using System.Linq;
 
 namespace TheLendingCircle.Pages;
 
@@ -22,6 +23,9 @@ public class IndexModel : PageModel
     }
     public void OnGet()
     {
-        ItemsList = _context.Items.Take(5).ToList();
+        Random rand = new Random();
+        int toSkip = rand.Next(0, _context.Items.Count());
+
+        ItemsList = _context.Items.OrderBy(arg => Guid.NewGuid()).Take(5).ToList();
     }
 }
