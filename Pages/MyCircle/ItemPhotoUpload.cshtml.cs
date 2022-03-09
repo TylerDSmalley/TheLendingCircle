@@ -41,14 +41,23 @@ namespace TheLendingCircle.Pages.MyCircle
         }
 
         public ApplicationUser CurrentUser { get; set; }
+        public List<Loan> PendingLoans { get; set; }
+        public int UnseenLoans { get; set; }
+
 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
+            PendingLoans = await _context.Loans.Where(i => i.Borrower.Id == CurrentUser.Id && i.HasBeenViewed == false).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
             if (CurrentUser == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            if(PendingLoans != null) {
+                UnseenLoans = PendingLoans.Count();
+            } else {
+                UnseenLoans = 0;
             }
             return Page();
         }

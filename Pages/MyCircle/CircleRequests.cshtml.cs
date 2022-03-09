@@ -23,6 +23,8 @@ namespace TheLendingCircle.Pages.MyCircle
         public ApplicationUser CurrentUser { get; set; }
         public List<Request> CircleRequests { get; set; }
         public List<Request> PendingRequests { get; set; }
+        public List<Loan> PendingLoans { get; set; }
+        public int UnseenLoans { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -31,10 +33,12 @@ namespace TheLendingCircle.Pages.MyCircle
         {
             public int Id { get; set; }
         }
+
         private async Task LoadAsync(string id)
         {
             CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
             PendingRequests = await _context.Requests.Where(i => i.Borrower.Id == CurrentUser.Id).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
+            PendingLoans = await _context.Loans.Where(i => i.Borrower.Id == CurrentUser.Id && i.HasBeenViewed == false).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -50,6 +54,12 @@ namespace TheLendingCircle.Pages.MyCircle
                 request.HasBeenViewed = true;
             }
             await _context.SaveChangesAsync();
+
+            if(PendingLoans != null) {
+                UnseenLoans = PendingLoans.Count();
+            } else {
+                UnseenLoans = 0;
+            }
             return Page();
         }
 
