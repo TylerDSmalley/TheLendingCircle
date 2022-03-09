@@ -82,8 +82,9 @@ namespace TheLendingCircle.Pages.MyCircle
 
                     var invalids = System.IO.Path.GetInvalidFileNameChars();
                     var newName = String.Join("_", Input.itemPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
-            
-                    UploadFileToS3(Input.itemPhoto);
+                    newName =  id + "-" + newName;
+
+                    UploadFileToS3(Input.itemPhoto, newName);
 
                     imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/", newName);
                 }
@@ -108,7 +109,7 @@ namespace TheLendingCircle.Pages.MyCircle
             return Page();
         }
 
-        public async Task UploadFileToS3(IFormFile file)
+        public async Task UploadFileToS3(IFormFile file, string newName)
         {
         using (var client = new AmazonS3Client("AKIAXJR27NJ66LXTY6EN", "fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", RegionEndpoint.USEast1))
         {
@@ -119,7 +120,7 @@ namespace TheLendingCircle.Pages.MyCircle
             var uploadRequest = new TransferUtilityUploadRequest
             {
                 InputStream = newMemoryStream,
-                Key = file.FileName,
+                Key = newName,
                 BucketName = bucketName,
                 CannedACL = S3CannedACL.PublicRead
             };
