@@ -27,16 +27,6 @@ namespace TheLendingCircle.Pages.Items
         {
             GetItems();
         }
-
-        // public IActionResult OnPost()
-        // {
-        //     if (!string.IsNullOrEmpty(SearchString))
-        //     {
-        //         SearchString = Uri.EscapeDataString(SearchString);
-        //     }
-        //     return Redirect("./Search?query=" + SearchString);
-        // }
-
         private void GetItems(int itemCount = 0)
         {
             if (string.IsNullOrEmpty(SearchTerm))
