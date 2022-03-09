@@ -10,10 +10,9 @@
         <li class="nav-item dropdown text-white">
             <a class="nav-link text-dark" href="#" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-                <div class="rounded-circle d-flex align-items-center justify-content-center"
-                style="height:40px;width:40px;background-color:#652EE4">
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="height:40px;width:40px;background-color:#652EE4">
                     @* gear icon *@
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-gear"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-gear transform"
                     viewBox="0 0 16 16">
                         <path
                         d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
@@ -45,7 +44,7 @@
             </ul>
         </li>
         <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-            <img class="rounded-circle" width=40 height=40
+            <img class="rounded-circle profileThumb" width=40 height=40
             src="@UserManager.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UserPhotoPath" />
         </a>
     }
