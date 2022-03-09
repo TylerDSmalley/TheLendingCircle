@@ -10,6 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Models;
+using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.WebUtilities;
+using System;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
+
 namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
 {
     [Authorize]
@@ -119,6 +127,11 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
 
             if (Input.Email != user.Email)
             {
+                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.Email);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var changeUserName = await _userManager.ChangeEmailAsync(user, Input.Email, code);
+                user.NormalizedEmail =  Input.Email.ToUpper();
+                user.NormalizedUserName = Input.Email.ToUpper();
                 user.Email = Input.Email;
                 user.UserName = Input.Email;
             }
