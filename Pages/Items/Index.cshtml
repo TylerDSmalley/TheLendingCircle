@@ -5,11 +5,11 @@
 @{
     ViewData["Title"] = "Item Page";
 }
+<partial name="../../Areas/Identity/Pages/Account/Manage/_StatusMessage" for="StatusMessage" />
 
 <div class="d-lg-flex gap-3">
     <div style="max-width:600px" class="container">
-        <img class="p-0 container-fluid roundedcorners"
-            src="@Model.CurrentItem.ItemPhotoPath" alt="item" />
+        <img class="p-0 container-fluid roundedcorners" src="@Model.CurrentItem.ItemPhotoPath" alt="item" />
     </div>
     <div class="p-4 container-fluid">
         <h1>@Model.CurrentItem.Title - @Model.CurrentItem.Condition</h1>
@@ -28,17 +28,28 @@
 
         @if (SignInManager.IsSignedIn(User))
         {
-            <form method="post">
-                <h4>
-                    <label asp-for="RequestMessage" class="control-label"></label>
-                </h4>
-                <span asp-validation-for="RequestMessage" class="text-danger"></span>
-                <textarea asp-for="RequestMessage" style="height:150px" class="my-2 form-control"
+            @if (Model.Requested)
+            {
+                <div style="width:fit-content;" class="roundedcorners py-2 px-5 text-white bg-secondary">Request Pending</div>
+            }
+            else if (Model.CurrentItem.Owner.Id != SignInManager.UserManager.GetUserId(User))
+            {
+                <form method="post">
+                    <h4>
+                        <label asp-for="RequestMessage" class="control-label"></label>
+                    </h4>
+                    <span asp-validation-for="RequestMessage" class="text-danger"></span>
+                    <textarea asp-for="RequestMessage" style="height:150px" class="my-2 form-control"
                 placeholder="Leave a message..."></textarea>
-                <div>
-                    <button type="submit" class="roundedcorners px-5 btn btn-success">Request</button>
-                </div>
-            </form>
+                    <div>
+                        <button type="submit" class="roundedcorners px-5 btn btn-success">Request</button>
+                    </div>
+                </form>
+            }
+        }
+        else
+        {
+            <h2>Please log in to request to borrow this item!</h2>
         }
     </div>
 </div>

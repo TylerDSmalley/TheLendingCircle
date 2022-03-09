@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,13 +23,18 @@ namespace TheLendingCircle.Pages.Items
 
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
+
+        public bool Requested { get; set; } = false;
+
+        [TempData]
+        public string? StatusMessage { get; set; }
         public Item? CurrentItem { get; set; }
-        public ApplicationUser? CurrentOwner {get;set;} = new ApplicationUser();
+        public ApplicationUser? CurrentOwner { get; set; } = new ApplicationUser();
 
         [Required]
         [BindProperty, Display(Name = "Request Message")]
-        [StringLength(1000, MinimumLength = 1, ErrorMessage ="Message must be between 1 and 1000 characters")]
-        public string? RequestMessage {get;set;}
+        [StringLength(1000, MinimumLength = 1, ErrorMessage = "Message must be between 1 and 1000 characters")]
+        public string? RequestMessage { get; set; }
 
         public Index(ILogger<Index> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -45,10 +51,27 @@ namespace TheLendingCircle.Pages.Items
                 return NotFound($"Unable to item user with ID '{Id}'.");
             }
             CurrentItem = item;
-            // _logger.LogInformation($"Owner: {CurrentItem.Owner}");
+
+            var LoggedInUser = await _userManager.GetUserAsync(User);
+
+            if (LoggedInUser != null)
+            {
+                // user cant request twice
+                var RequestExists = await _context.Requests.Where(req =>
+                    req.Borrower.Id == LoggedInUser.Id
+                    && req.ItemLoaned.Id == CurrentItem.Id
+                ).FirstOrDefaultAsync();
+
+                if (RequestExists != null)
+                {
+                    Requested = true;
+                }
+            }
+
             return Page();
         }
 
+        [Authorize]
         public async Task<IActionResult> OnPostAsync()
         {
             var Borrower = await _userManager.GetUserAsync(User);
@@ -57,20 +80,38 @@ namespace TheLendingCircle.Pages.Items
             if (!ModelState.IsValid)
             {
                 CurrentItem = ThisItem;
+                StatusMessage = "An unexpected error occured. Please try again.";
                 return Page();
             }
 
-            _context.Request.Add(new Request() {
-                Message = RequestMessage, 
-                CreationTime = DateTime.Now, 
+            // user cant request twice
+            var RequestExists = await _context.Requests.Where(req =>
+                req.Borrower.Id == Borrower.Id
+                && req.ItemLoaned.Id == ThisItem.Id
+            ).FirstOrDefaultAsync();
+
+            if (RequestExists != null)
+            {
+                StatusMessage = "Error: You have already requested this item!";
+                CurrentItem = ThisItem;
+                return Page();
+            }
+
+            _context.Request.Add(new Request()
+            {
+                Message = RequestMessage,
+                CreationTime = DateTime.Now,
                 HasBeenViewed = false,
-                Owner =  ThisItem.Owner,
+                Owner = ThisItem.Owner,
                 Borrower = Borrower,
                 ItemLoaned = ThisItem
-                });
+            });
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            StatusMessage = "Request sent successfully!";
+            Requested = true;
+            CurrentItem = ThisItem;
+            return Page();
         }
     }
 }
