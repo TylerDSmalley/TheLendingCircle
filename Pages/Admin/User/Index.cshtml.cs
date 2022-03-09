@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Data;
 using TheLendingCircle.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_User
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;

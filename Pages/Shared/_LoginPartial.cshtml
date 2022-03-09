@@ -44,8 +44,8 @@
                 </li>
             </ul>
         </li>
-        <a class="dropdown-item nav-link text-dark rounded" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-            <img class="rounded" width=40 height=40
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            <img class="rounded-circle" width=40 height=40
             src="@UserManager.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().UserPhotoPath" />
         </a>
     }

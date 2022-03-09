@@ -238,10 +238,10 @@ N/A
 - Gave visual feedback for pending circles
 
 2. What I plan to do from this scrum to the next
-- Add some visual styling to site. (logo)
+- DONEAdd some visual styling to site. (logo)
 - Bug Test
-- take a look at average rating in review submission
-- Fix image sizing in mycircle pages
+- DONE take a look at average rating in review submission
+- DONE Fix image sizing in mycircle pages
 
 3. Where do I need assistance? What do I need to figure out?
 N/A

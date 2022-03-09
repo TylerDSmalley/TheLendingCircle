@@ -29,7 +29,7 @@
                 @* searchbar *@
                 <div class="input-group d-flex my-3 align-items-center">
                     <form class="w-100">
-                        <input name="SearchTerm" value="@ViewData["SearchTerm"]" asp-route-searchTerm="./Items/Search/"
+                        <input name="SearchTerm" value='@ViewData["SearchTerm"]' asp-route-searchTerm="./Items/Search/"
                             class="rounded-pill w-100 form-control" placeholder="Search for an item">
                         <button type="submit" formaction="/Items/Search"
                             style="position:absolute;right:12px;bottom: 7px;z-index:10; color:#8C48E0;"

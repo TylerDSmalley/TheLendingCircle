@@ -9,9 +9,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TheLendingCircle.Data;
 using TheLendingCircle.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_Loan
 {
+    [Authorize]
+
     public class EditModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;
