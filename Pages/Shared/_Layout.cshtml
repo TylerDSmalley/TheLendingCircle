@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,19 +9,36 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="false" />
     <link rel="stylesheet" href="~/TheLendingCircle.styles.css" asp-append-version="true" />
 </head>
+
 <body class="bg-light">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navColor border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"><img class="img-max rounded-3" src="https://lendingcircle.s3.amazonaws.com/Logo.png" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img class="img-max rounded-3"
+                        src="https://lendingcircle.s3.amazonaws.com/Logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="input-group d-flex my-3 align-items-center">
+                    <form class="w-100">
+                        <input name="SearchTerm" value="@ViewData["SearchTerm"]" asp-route-searchTerm="./Items/Search/" class="rounded-pill w-100 form-control"
+                            placeholder="Search for an item">
+                        <button type="submit" formaction="/Items/Search"
+                            style="position:absolute;right:12px;bottom: 7px;z-index:10; color:#8C48E0;"
+                            class="rounded-circle btn" type="button"> <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
+                        </input>
+                    </form>
+                </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        
-                    </ul>
+                    @* <ul class="navbar-nav flex-grow-1">
+
+                        </ul> *@
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -45,4 +63,5 @@
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("Styles", false)
 </body>
+
 </html>

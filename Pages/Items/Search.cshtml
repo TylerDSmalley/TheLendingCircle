@@ -1,17 +1,15 @@
-﻿@page "{query:regex(^[A-Za-z0-9 -_.]+)?}"
+﻿@page "{searchTerm:regex(^[A-Za-z0-9 -_.]+)?}"
 @model TheLendingCircle.Pages.Items.SearchModel
 @{
     ViewData["Title"] = "Search Page";
 
 }
 <div class="container" id="search-container">
-    <partial name="../Shared/SearchPartial" model=@Model.SearchString />
-
-    <h1>@(string.IsNullOrEmpty(@Model.Query) ? "" : $"Showing results for '{Model.Query}'")</h1>
+    <h1>@(string.IsNullOrEmpty(@Model.SearchTerm) ? "" : $"Showing results for '{Model.SearchTerm}'")</h1>
 
     @if (Model.ItemsList.Count < 1)
     {
-        <h2>No results found for '@Model.Query'</h2>
+        <h2>No results found for '@Model.SearchTerm'</h2>
     }
 
     @foreach (var item in Model.ItemsList)
@@ -60,7 +58,7 @@
 
 <Script>
     let itemCount = 3;
-    let SearchQuery = @Html.Raw(Json.Serialize(Model.Query));
+    let SearchQuery = @Html.Raw(Json.Serialize(Model.SearchTerm));
     function loadMore(event) {
         event.preventDefault();
         $.ajax({

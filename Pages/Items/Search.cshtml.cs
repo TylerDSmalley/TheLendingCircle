@@ -15,8 +15,8 @@ namespace TheLendingCircle.Pages.Items
             _context = context;
         }
 
-        [FromQuery(Name = "query")]
-        public string? Query { get; set; }
+        [FromQuery(Name = "searchTerm")]
+        public string? SearchTerm { get; set; }
 
         [BindProperty]
         public string? SearchString { get; set; }
@@ -28,18 +28,18 @@ namespace TheLendingCircle.Pages.Items
             GetItems();
         }
 
-        public IActionResult OnPost()
-        {
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                SearchString = Uri.EscapeDataString(SearchString);
-            }
-            return Redirect("./Search?query=" + SearchString);
-        }
+        // public IActionResult OnPost()
+        // {
+        //     if (!string.IsNullOrEmpty(SearchString))
+        //     {
+        //         SearchString = Uri.EscapeDataString(SearchString);
+        //     }
+        //     return Redirect("./Search?query=" + SearchString);
+        // }
 
         private void GetItems(int itemCount = 0)
         {
-            if (string.IsNullOrEmpty(Query))
+            if (string.IsNullOrEmpty(SearchTerm))
             {
                 ItemsList = _context.Items
                                 .Skip(itemCount)
@@ -53,7 +53,7 @@ namespace TheLendingCircle.Pages.Items
                     .Where(item =>
                         item.Title
                             .ToLower()
-                            .Contains(Query.ToLower())
+                            .Contains(SearchTerm.ToLower())
                         )
                     .Skip(itemCount)
                     .Take(3)
@@ -63,9 +63,9 @@ namespace TheLendingCircle.Pages.Items
         }
 
 
-        public JsonResult OnGetLoadMore(int itemCount, string searchQuery)
+        public JsonResult OnGetLoadMore(int itemCount, string query)
         {
-            Query = searchQuery;
+            SearchTerm = query;
             GetItems(itemCount);
             if (ItemsList.Count() < 1)
             {
