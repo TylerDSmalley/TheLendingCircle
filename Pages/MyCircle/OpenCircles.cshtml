@@ -78,12 +78,12 @@
                                         <div class="field">Borrower Profile:</div>
                                         <div class="value">
                                             <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id"
-                                            asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
+                                            asp-page="#../Users/UserProfile">@loan.Borrower.Email</a>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="field">Borrower Name:</div>
-                                        <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
+                                        <div class="value">@loan.Owner.FirstName @loan.Borrower.LastName</div>
                                     </li>
                                     <li>
                                         <div class="field">Item Requested:</div>
@@ -125,14 +125,14 @@
                                         <div class="value">@loan.DueDate</div>
                                     </li>
                                     <li>
-                                        <div class="field">Borrower Profile:</div>
+                                        <div class="field">Owner Profile:</div>
                                         <div class="value">
                                             <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id"
                                             asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="field">Borrower Name:</div>
+                                        <div class="field">Owner Name:</div>
                                         <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
                                     </li>
                                     <li>

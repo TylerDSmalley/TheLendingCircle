@@ -7,13 +7,14 @@
 }
 <partial name="../../Areas/Identity/Pages/Account/Manage/_StatusMessage" for="StatusMessage" />
 
-<div class="d-lg-flex gap-3">
+<div class="container rounded-3 navColor p-4 d-lg-flex gap-3">
     <div style="max-width:600px" class="container">
         <img class="p-0 container-fluid roundedcorners" src="@Model.CurrentItem.ItemPhotoPath" alt="item" />
     </div>
     <div class="p-4 container-fluid">
-        <h1>@Model.CurrentItem.Title - @Model.CurrentItem.Condition</h1>
-        <h3>
+        <h1 class="text-dark">@Model.CurrentItem.Title</h1>
+        <h4 class="text-secondary">Condition: @Model.CurrentItem.Condition</h4>
+        <p>
             @if (Model.CurrentItem.Available)
             {
                 <span class="text-success">Currently Available</span>
@@ -22,9 +23,9 @@
             {
                 <span class="text-secondary">Currently Unavailable</span>
             }
-        </h3>
-        <h5><a asp-page="Profile" asp-route-id="@Model.CurrentItem.Owner">@Model.CurrentItem.Owner</a></h5>
-        <p>@Model.CurrentItem.Description</p>
+        </h5>
+        <p><a asp-page="Profile" asp-route-id="@Model.CurrentItem.Owner">@Model.CurrentItem.Owner</a></h5>
+        <p class="text-secondary">@Model.CurrentItem.Description</p>
 
         @if (SignInManager.IsSignedIn(User))
         {
@@ -49,7 +50,7 @@
         }
         else
         {
-            <h2>Please log in to request to borrow this item!</h2>
+            <h2 class="text-secondary">Please log in to request to borrow this item!</h2>
         }
     </div>
 </div>

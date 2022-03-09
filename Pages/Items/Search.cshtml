@@ -34,7 +34,7 @@
                                 <span class="text-secondary">Currently Unavailable</span>
                             }
                         </h6>
-                        <p>
+                        <p class="text-dark">
                             @if (item.Description.Length < 120)
                             {
                                 @item.Description
@@ -98,7 +98,7 @@
                                     `<span class="text-secondary">Currently Unavailable</span>`
                                 }
                                                 </h6>
-                                                <p>
+                                                <p class="text-dark">
                                                     ${item.description.length < 120 ?
                                     item.description :
                                     item.description.Substring(0, 120)
