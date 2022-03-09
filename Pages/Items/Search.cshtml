@@ -82,30 +82,32 @@
                     $.each(result.data, function (key, item) {
                         console.log(result)
                         $("#search-container").append(`
-                                <a href="/Items/${item.id}">
-                                    <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
-                                        <div>
-                                            <img style="object-fit: cover;" class="roundedcorners" width=200 height=200
-                                            src="${item.itemPhotoPath}">
+                            <div class="container rounded-3 navColor p-3 m-4 ">
+                                    <a href="/Items/${item.id}">
+                                        <div class="my-5 w-100 h-100 border-secondary gap-5 d-flex">
+                                            <div>
+                                                <img style="object-fit: cover;" class="roundedcorners" width=200 height=200
+                                                src="${item.itemPhotoPath}">
+                                            </div>
+                                            <div class="my-1 container-fluid">
+                                                <h4>${item.title}</h4>
+                                                <h6><a href="/Items/Profile/${item.owner.userName}">${item.owner.userName}</a></h6>
+                                                <h6>
+                                                    ${item.available ?
+                                    `<span class="text-success">Currently Available</span>` :
+                                    `<span class="text-secondary">Currently Unavailable</span>`
+                                }
+                                                </h6>
+                                                <p>
+                                                    ${item.description.length < 120 ?
+                                    item.description :
+                                    item.description.Substring(0, 120)
+                                }
+                                                    ...</p>
+                                            </div>
                                         </div>
-                                        <div class="my-1 container-fluid">
-                                            <h4>${item.title}</h4>
-                                            <h6><a href="/Items/Profile/${item.owner.userName}">${item.owner.userName}</a></h6>
-                                            <h6>
-                                                ${item.available ?
-                                `<span class="text-success">Currently Available</span>` :
-                                `<span class="text-secondary">Currently Unavailable</span>`
-                            }
-                                            </h6>
-                                            <p>
-                                                ${item.description.length < 120 ?
-                                item.description :
-                                item.description.Substring(0, 120)
-                            }
-                                                ...</p>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                            </div>
                         `);
                     })
                     itemCount += 3;
