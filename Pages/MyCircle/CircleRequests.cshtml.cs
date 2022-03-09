@@ -50,6 +50,7 @@ namespace TheLendingCircle.Pages.MyCircle
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             await LoadAsync(user.Id);
+            
             foreach(var request in CircleRequests){
                 request.HasBeenViewed = true;
             }
