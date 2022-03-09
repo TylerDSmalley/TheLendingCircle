@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_Request
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;

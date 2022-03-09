@@ -26,6 +26,7 @@ namespace TheLendingCircle.Pages.MyCircle
         public List<Loan> BorrowedItems { get; set; }
         public List<Request> CircleRequests { get; set; }
         public int UnseenRequests { get; set; }
+
         private async Task LoadAsync(string id)
         {
             CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();

@@ -1,5 +1,5 @@
 body{
-    background: #eaeaea;
+    background: #e6eefa;
 }
 .profile-info-list > li + li.title {
     padding-top: 1.5625rem;
@@ -78,7 +78,7 @@ body .fc-icon {
 .profile-header .profile-header-tab > li.active > a,
 .profile-header .profile-header-tab > li > a.active {
     color: #007aff;
-    background-color: #ebecfa;
+    background-color: #e6eefa;
     border-top: lightgray solid thin;
     border-left: lightgray solid thin;
     border-right: lightgray solid thin;

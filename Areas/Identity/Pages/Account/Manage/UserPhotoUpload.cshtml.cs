@@ -65,9 +65,7 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
                 if (Input.userPhoto != null)
                 {
                     string fileExtension = Path.GetExtension(Input.userPhoto.FileName).ToLower();
-                    //string filePath = Path.GetFullPath(Input.userPhoto.FileName);
-                    
-                   // Console.WriteLine(filePath);
+                   
                     string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
                     if (!allowedExtensions.Contains(fileExtension))
@@ -78,8 +76,8 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
 
                     var invalids = System.IO.Path.GetInvalidFileNameChars();
                     var newName = String.Join("_", Input.userPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
-            
-                    UploadFileToS3(Input.userPhoto);
+                    newName =  id + "-" + newName;
+                    UploadFileToS3(Input.userPhoto, newName);
 
                     imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/", newName);
                 }
@@ -104,18 +102,18 @@ namespace TheLendingCircle.Areas.Identity.Pages.Account.Manage
         }
 
 
-        public async Task UploadFileToS3(IFormFile file)
+        public async Task UploadFileToS3(IFormFile file,string newName)
         {
         using (var client = new AmazonS3Client("AKIAXJR27NJ66LXTY6EN", "fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", RegionEndpoint.USEast1))
         {
         using (var newMemoryStream = new MemoryStream())
         {
             file.CopyTo(newMemoryStream);
-
+        
             var uploadRequest = new TransferUtilityUploadRequest
             {
                 InputStream = newMemoryStream,
-                Key = file.FileName,
+                Key = newName,
                 BucketName = bucketName,
                 CannedACL = S3CannedACL.PublicRead
             };

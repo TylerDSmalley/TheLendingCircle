@@ -41,14 +41,23 @@ namespace TheLendingCircle.Pages.MyCircle
         }
 
         public ApplicationUser CurrentUser { get; set; }
+        public List<Loan> PendingLoans { get; set; }
+        public int UnseenLoans { get; set; }
+
 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
+            PendingLoans = await _context.Loans.Where(i => i.Borrower.Id == CurrentUser.Id && i.HasBeenViewed == false).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
             if (CurrentUser == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            if(PendingLoans != null) {
+                UnseenLoans = PendingLoans.Count();
+            } else {
+                UnseenLoans = 0;
             }
             return Page();
         }
@@ -73,8 +82,9 @@ namespace TheLendingCircle.Pages.MyCircle
 
                     var invalids = System.IO.Path.GetInvalidFileNameChars();
                     var newName = String.Join("_", Input.itemPhoto.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
-            
-                    UploadFileToS3(Input.itemPhoto);
+                    newName =  id + "-" + newName;
+
+                    UploadFileToS3(Input.itemPhoto, newName);
 
                     imagePath = Path.Combine("https://lendingcircle.s3.amazonaws.com/", newName);
                 }
@@ -99,7 +109,7 @@ namespace TheLendingCircle.Pages.MyCircle
             return Page();
         }
 
-        public async Task UploadFileToS3(IFormFile file)
+        public async Task UploadFileToS3(IFormFile file, string newName)
         {
         using (var client = new AmazonS3Client("AKIAXJR27NJ66LXTY6EN", "fmnPlcqx20CYFbPGQXt2IfWtFektKnHFvj5brUB6", RegionEndpoint.USEast1))
         {
@@ -110,7 +120,7 @@ namespace TheLendingCircle.Pages.MyCircle
             var uploadRequest = new TransferUtilityUploadRequest
             {
                 InputStream = newMemoryStream,
-                Key = file.FileName,
+                Key = newName,
                 BucketName = bucketName,
                 CannedACL = S3CannedACL.PublicRead
             };

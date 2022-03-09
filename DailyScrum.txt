@@ -231,7 +231,7 @@ N/A
 N/A
 
 ------------------------------------------------------------------------------------
-<<Daily Scrum - 2021-03-07 >>
+<<Daily Scrum - 2021-03-08 >>
 --Tyler--
 1. What I have done / not done since last Scrum
 - Finished bug testing circle path
@@ -268,6 +268,48 @@ N/A
 - Give visual feedback that request was sent
 - Add please log in to request bar if user is not logged in
 
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+------------------------------------------------------------------------------------
+<<Daily Scrum - 2021-03-09 >>
+--Tyler--
+1. What I have done / not done since last Scrum
+- Added some visual styling to site. w/ (logo)
+- Added avg rating feature
+- Fixed image sizing in mycircle pages
+- Various bug fixes
+
+2. What I plan to do from this scrum to the next
+- Bug testing
+- Presentation
+
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+--Ileana--
+1. What I have done / not done since last Scrum
+- finished user profile
+
+2. What I plan to do from this scrum to the next
+- Bug testing
+- Presentation
+
+
+3. Where do I need assistance? What do I need to figure out?
+
+--Phil--
+1. What I have done / not done since last Scrum
+- Hid request form to owner of item
+- Hid request form if request was already submitted
+- Gave visual feedback that request was sent
+- Added please log in to request bar if user is not logged in
+- Moved search bar to nav
+
+2. What I plan to do from this scrum to the next
+- Bug testing
+- Presentation
 
 3. Where do I need assistance? What do I need to figure out?
 N/A

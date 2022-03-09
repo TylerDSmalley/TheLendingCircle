@@ -25,10 +25,14 @@ namespace TheLendingCircle.Pages.MyCircle.MyReviews
         public List<Review> Reviews { get; set; }
         public List<Request> CircleRequests { get; set; }
         public int UnseenRequests { get; set; }
+        public List<Loan> PendingLoans { get; set; }
+        public int UnseenLoans { get; set; }
+
         private async Task LoadAsync(string id)
         {
             CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
             Reviews = await _context.Reviews.Where(r => r.Borrower.Id == id).Include(r => r.Owner).Include(r => r.Borrower).ToListAsync();
+            PendingLoans = await _context.Loans.Where(i => i.Borrower.Id == CurrentUser.Id && i.HasBeenViewed == false).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -44,6 +48,11 @@ namespace TheLendingCircle.Pages.MyCircle.MyReviews
                 if(request.HasBeenViewed == false) {
                     UnseenRequests++;
                 }
+            }
+            if(PendingLoans != null) {
+                UnseenLoans = PendingLoans.Count();
+            } else {
+                UnseenLoans = 0;
             }
             return Page();
         }
