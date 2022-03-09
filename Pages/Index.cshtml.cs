@@ -23,9 +23,6 @@ public class IndexModel : PageModel
     }
     public void OnGet()
     {
-        Random rand = new Random();
-        int toSkip = rand.Next(0, _context.Items.Count());
-
         ItemsList = _context.Items.OrderBy(arg => Guid.NewGuid()).Take(5).ToList();
     }
 }
