@@ -120,7 +120,7 @@ namespace TheLendingCircle.Pages.Items
 
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Please login to respond to the following request:\n" + RequestMessage;  
+            string mailbody = "Please login to respond to the following request:\n" + "\n" +RequestMessage;  
             message.Subject = "You have a new Lending Circle request!";  
             message.Body = mailbody;  
            // message.BodyEncoding = Encoding.UTF8;  
