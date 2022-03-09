@@ -18,7 +18,7 @@ body:before {
     content: "";
     height: 0px;
     padding: 0px;
-    border: 110em solid whitesmoke;
+    border: 110em solid #ebecfa;
 position: absolute;
 left: 50%;
 top: 100%;

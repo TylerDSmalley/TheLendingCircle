@@ -1,22 +1,6 @@
 body{
     background: #eaeaea;
 }
-.profile-info-list {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-.friend-list,
-.img-grid-list {
-    margin: -1px;
-    list-style-type: none;
-}
-.profile-info-list > li.title {
-    font-size: 0.625rem;
-    font-weight: 700;
-    color: #8a8a8f;
-    padding: 0 0 0.3125rem;
-}
 .profile-info-list > li + li.title {
     padding-top: 1.5625rem;
 }
@@ -38,35 +22,10 @@ body{
     -moz-border-radius: 2.5rem;
     border-radius: 2.5rem;
 }
-.coming-soon-cover img,
-.email-detail-attachment .email-attachment .document-file img,
-.email-sender-img img,
-.friend-list .friend-img img,
-.profile-header-img img {
-    max-width: 100%;
-}
-.table.table-profile th {
-    border: none;
-    color: #000;
-    padding-bottom: 0.3125rem;
-    padding-top: 0;
-}
-.table.table-profile td {
-    border-color: #c8c7cc;
-}
-.table.table-profile tbody + thead > tr > th {
-    padding-top: 1.5625rem;
-}
-.table.table-profile .field {
-    color: #666;
-    font-weight: 600;
-    width: 25%;
-    text-align: right;
-}
-.table.table-profile .value {
-    font-weight: 500;
-}
+
 .profile-header {
+    width: 100%;
+    padding: 0;
     position: relative;
     overflow: hidden;
 }
@@ -119,6 +78,7 @@ body .fc-icon {
 .profile-header .profile-header-tab > li.active > a,
 .profile-header .profile-header-tab > li > a.active {
     color: #007aff;
+    background-color: #ebecfa;
     border-top: lightgray solid thin;
     border-left: lightgray solid thin;
     border-right: lightgray solid thin;
@@ -206,21 +166,13 @@ body .fc-widget-header a {
         padding: 0;
     }
     .profile-container {
-        padding: 0.9375rem 0.9375rem 3.6875rem;
+        padding: 0;
     }
-    .friend-list > li {
-        float: none;
-        width: auto;
-    }
+    
 }
 .profile-info-list {
     padding: 0;
     margin: 0;
-    list-style-type: none;
-}
-.friend-list,
-.img-grid-list {
-    margin: -1px;
     list-style-type: none;
 }
 .profile-info-list > li.title {

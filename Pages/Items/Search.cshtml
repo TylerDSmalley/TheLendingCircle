@@ -22,8 +22,8 @@
                     <img class="roundedcorners" style="object-fit: cover;" width=200 height=200 src="@item.ItemPhotoPath">
                 </div>
                 <div class="my-1 container-fluid">
-                    <h4>@item.Title</h4>
-                    <h6><a asp-page="/Profile" asp-route-id="@item.Id">@item.Owner</a></h6>
+                    <h4><a asp-page="/Items/Index" asp-route-id="@item.Id">@item.Title</a></h4>
+                    <h6>@item.Owner</h6>
                     <h6>
                         @if (item.Available)
                         {

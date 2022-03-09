@@ -84,3 +84,20 @@ body{
     width: 150px;
     height: 150px;
   }
+  .btn-primary {
+    color: #fff;
+    background-color: #652EE4;
+    border-color: #652EE4;
+  }
+  .btn:hover {
+    color: #fff;
+    background-color: #895ff0;
+    border-color: #895ff0;
+  }
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #652EE4;
+    border-color: #652EE4;
+  }
+  
+  

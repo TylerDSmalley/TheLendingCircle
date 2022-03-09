@@ -14,7 +14,7 @@
 <div class="container">
     <div id="content" class="content p-0">
         <div class="profile-header">
-            <div class="profile-header-cover" style="background-color: lightskyblue;"></div>
+            <div class="profile-header-cover" style="background-color: #895ff0;"></div>
             <div class="profile-header-content">
                 <div class="">
                     <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3"
@@ -37,9 +37,10 @@
                 <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link active show"
                         style="color: lightskyblue;" data-toggle="tab">OPEN CIRCLES</a></li>
                 <li class="nav-item mt-1">
-                    @if(@Model.UnseenRequests > 0)
+                    @if (@Model.UnseenRequests > 0)
                     {
-                        <p class="float-start m-0 p-0 bg-danger text-white rounded-circle fs-6 fw-light">  &nbsp @Model.UnseenRequests  &nbsp </p>
+                        <p class="float-start m-0 p-0 bg-danger text-white rounded-circle fs-6 fw-light"> &nbsp
+                            @Model.UnseenRequests &nbsp </p>
                     }
                     <a href="./CircleRequests" class="nav-link" data-toggle="tab">CIRCLE REQUESTS</a>
                 </li>
@@ -49,94 +50,102 @@
 
         <div class="container d-flex flex-column justify-content-evenly w-75">
             <h2 class="mt-2">My Open Circles</h2>
-            <p class="mt-3 mb-0 w-25 fw-light fst-italic">My Loaned Items</p>
+            <a class="btn btn-primary mt-3 mb-0 w-25 fw-light fst-italic" data-bs-toggle="collapse" href="#Collapse1"
+                role="button" aria-expanded="false" aria-controls="Collapse1">Currently Loaned Items</a>
             <hr />
+            <div class="collapse" id="Collapse1">
 
-            @foreach (var loan in Model.LoanedItems)
-            {
-                <div class="Container bg-light bd-highlight my-4">
-                    <div class="row">
-                        <div class="col col-lg-8">
-                            <div class="m-b-10"><b>Circle# @loan.Id</b></div>
-                            <img src="@loan.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
-                        </div>
-                        <div class="col-lg-4 hidden-xs hidden-sm">
-                            <ul class="profile-info-list">
-                                <li class="title">CIRCLE INFORMATION</li>
-                                <li>
-                                    <div class="field">Date Loaned:</div>
-                                    <div class="value">@loan.CreationTime</div>
-                                </li>
-                                <li>
-                                    <div class="field">Expected Return:</div>
-                                    <div class="value">@loan.DueDate</div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Profile:</div>
-                                    <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id"
-                                        asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Name:</div>
-                                    <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
-                                </li>
-                                <li>
-                                    <div class="field">Item Requested:</div>
-                                    <div class="value">@loan.ItemLoaned.Title</div>
-                                </li>
-                                <li>
-                                    <div class="field">Item Return Form:</div>
-                                    <div class="value"><a class="btn btn-xs btn-primary mb-2" asp-area="" asp-route-id="@loan.Id" asp-page="./CloseCircle">Close Circle</a></div>
-                                </li>
-                            </ul>
+                @foreach (var loan in Model.LoanedItems)
+                {
+                    <div class="Container bg-white p-3 rounded-3 bd-highlight my-4">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <div class="m-b-10"><b>Circle# @loan.Id</b></div>
+                                <img src="@loan.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
+                            </div>
+                            <div class="col-lg-4 hidden-xs hidden-sm">
+                                <ul class="profile-info-list">
+                                    <li class="title">CIRCLE INFORMATION</li>
+                                    <li>
+                                        <div class="field">Date Loaned:</div>
+                                        <div class="value">@loan.CreationTime</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Expected Return:</div>
+                                        <div class="value">@loan.DueDate</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Profile:</div>
+                                        <div class="value">
+                                            <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id"
+                                            asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Name:</div>
+                                        <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Item Requested:</div>
+                                        <div class="value">@loan.ItemLoaned.Title</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Item Return Form:</div>
+                                        <div class="value"><a class="btn btn-xs btn-primary mb-2" asp-area=""
+                                            asp-route-id="@loan.Id" asp-page="./CloseCircle">Close Circle</a></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-            }
-            <p class="mt-3 mb-0 w-25 fw-light fst-italic">My Borrowed Items</p>
+                    <hr />
+                }
+            </div>
+            <a class="btn btn-primary mt-3 mb-0 w-25 fw-light fst-italic" data-bs-toggle="collapse" href="#Collapse2"
+                role="button" aria-expanded="false" aria-controls="Collapse2">Currently Borrowed Items</a>
             <hr />
-            @foreach (var loan in Model.BorrowedItems)
-            {
-                <div class="Container bg-light bd-highlight my-4">
-                    <div class="row">
-                        <div class="col col-lg-8">
-                            <div class="m-b-10"><b>Circle# @loan.Id</b></div>
-                            <img src="@loan.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
-                        </div>
-                        <div class="col-lg-4 hidden-xs hidden-sm">
-                            <ul class="profile-info-list">
-                                <li class="title">CIRCLE INFORMATION</li>
-                                <li>
-                                    <div class="field">Date Loaned:</div>
-                                    <div class="value">@loan.CreationTime</div>
-                                </li>
-                                <li>
-                                    <div class="field">Expected Return:</div>
-                                    <div class="value">@loan.DueDate</div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Profile:</div>
-                                    <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id" asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Name:</div>
-                                    <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
-                                </li>
-                                <li>
-                                    <div class="field">Item Requested:</div>
-                                    <div class="value">@loan.ItemLoaned.Title</div>
-                                </li>
-                            </ul>
+            <div class="collapse" id="Collapse2">
+                @foreach (var loan in Model.BorrowedItems)
+                {
+                    <div class="Container bg-white p-3 rounded-3 bd-highlight my-4">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <div class="m-b-10"><b>Circle# @loan.Id</b></div>
+                                <img src="@loan.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
+                            </div>
+                            <div class="col-lg-4 hidden-xs hidden-sm">
+                                <ul class="profile-info-list">
+                                    <li class="title">CIRCLE INFORMATION</li>
+                                    <li>
+                                        <div class="field">Date Loaned:</div>
+                                        <div class="value">@loan.CreationTime</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Expected Return:</div>
+                                        <div class="value">@loan.DueDate</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Profile:</div>
+                                        <div class="value">
+                                            <a class="nav-item" asp-area="" asp-route-id="@loan.Borrower.Id"
+                                            asp-page="#../Users/UserProfile">@loan.Owner.Email</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Name:</div>
+                                        <div class="value">@loan.Owner.FirstName @loan.Owner.LastName</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Item Requested:</div>
+                                        <div class="value">@loan.ItemLoaned.Title</div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-            }
+                    <hr />
+                }
+            </div>
         </div>
     </div>
 </div>

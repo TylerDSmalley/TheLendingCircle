@@ -21,7 +21,6 @@ namespace TheLendingCircle.Pages.MyCircle
         }
 
         public ApplicationUser CurrentUser { get; set; }
-
         public List<Loan> LoanedItems { get; set; }
         public List<Loan> BorrowedItems { get; set; }
         public List<Request> CircleRequests { get; set; }

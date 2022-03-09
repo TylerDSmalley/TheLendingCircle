@@ -22,7 +22,7 @@ public class IndexModel : PageModel
     }
     public void OnGet()
     {
-        ItemsList = _context.Items.Take(6).ToList();
+        ItemsList = _context.Items.Take(5).ToList();
     }
 
     public IActionResult OnPost()

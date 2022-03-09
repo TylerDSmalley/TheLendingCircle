@@ -14,10 +14,11 @@
 <div class="container">
     <div id="content" class="content p-0">
         <div class="profile-header">
-            <div class="profile-header-cover" style="background-color: lightsalmon;"></div>
+            <div class="profile-header-cover" style="background-color: #895ff0;"></div>
             <div class="profile-header-content">
                 <div class="">
-                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3" alt="" />
+                    <img src="@Model.CurrentUser.UserPhotoPath" class="mb-4 rounded-circle cover float-start me-3"
+                        alt="" />
                 </div>
 
                 <div class="profile-header-info">
@@ -36,7 +37,9 @@
                 <li class="nav-item mt-1"><a href="./OpenCircles" class="nav-link" data-toggle="tab">OPEN CIRCLES</a>
                 </li>
                 <li class="nav-item mt-1">
-                    <a href="./CircleRequests" class="nav-link active show" style="color: lightsalmon;" data-toggle="tab">CIRCLE REQUESTS</a></li>
+                    <a href="./CircleRequests" class="nav-link active show" style="color: lightsalmon;"
+                        data-toggle="tab">CIRCLE REQUESTS</a>
+                </li>
                 <li class="nav-item mt-1"><a href="./MyReviews" class="nav-link" data-toggle="tab">MY REVIEWS</a></li>
             </ul>
         </div>
@@ -45,113 +48,122 @@
             <div class="d-flex flex-row align-items-center mb-0 mt-2">
                 <h2>My Circle Requests</h2>
             </div>
-            <p class="mt-3 mb-0 w-25 fw-light fst-italic">Requested Circles</p>
+            <a class="btn btn-primary mt-3 mb-0 w-25 fw-light fst-italic" data-bs-toggle="collapse" href="#Collapse1"
+                role="button" aria-expanded="false" aria-controls="Collapse1">Requested Circles</a>
             <hr />
-
-
-            @foreach (var request in Model.CircleRequests)
-            {
-                <div class="Container bg-light bd-highlight my-4">
-                    <div class="row">
-                        <div class="col col-lg-6">
-                            <div class="m-b-10"><b>My Item</b></div>
-                            <img src="@request.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
-                        </div>
-                        <div class="col-md-6 hidden-xs hidden-sm">
-                            <ul class="profile-info-list">
-                                <li class="title">ITEM INFORMATION</li>
-                                <li>
-                                    <div class="field">Id:</div>
-                                    <div class="value">@request.Id</div>
-                                </li>
-                                <li>
-                                    <div class="field">Message:</div>
-                                    <div class="value">@request.Message</div>
-                                </li>
-                                <li>
-                                    <div class="field">Date Requested:</div>
-                                    <div class="value">@request.CreationTime</div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Profile:</div>
-                                    <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
-                                        asp-page="#../Users/UserProfile">@request.Borrower.Email</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Name:</div>
-                                    <div class="value">@request.Borrower.FirstName @request.Borrower.LastName</div>
-                                </li>
-                                <li>
-                                    <div class="field">Item Requested:</div>
-                                    <div class="value">@request.ItemLoaned.Title</div>
-                                </li>
-                                <li>
-                                    <a class="field btn btn-xs btn-primary mb-2" asp-route-id="@request.Id" asp-page="./CreateLoan">Approve Request</a>
-                                    <form method="post" class="field">
-                                        <input asp-for="Input.Id" type="hidden" value="@request.Id" aria-required="true" />
-                                        <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Deny request</button>
-                                    </form>
-                                </li>
-                            </ul>
+            <div class="collapse" id="Collapse1">
+                @foreach (var request in Model.CircleRequests)
+                {
+                    <div class="Container bg-white p-3 rounded-3 rounded-3 bd-highlight my-4">
+                        <div class="row">
+                            <div class="col col-lg-6">
+                                <div class="m-b-10"><b>My Item</b></div>
+                                <img src="@request.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
+                            </div>
+                            <div class="col-md-6 hidden-xs hidden-sm">
+                                <ul class="profile-info-list">
+                                    <li class="title">ITEM INFORMATION</li>
+                                    <li>
+                                        <div class="field">Id:</div>
+                                        <div class="value">@request.Id</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Message:</div>
+                                        <div class="value">@request.Message</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Date Requested:</div>
+                                        <div class="value">@request.CreationTime</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Profile:</div>
+                                        <div class="value">
+                                            <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
+                                            asp-page="#../Users/UserProfile">@request.Borrower.Email</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Name:</div>
+                                        <div class="value">@request.Borrower.FirstName @request.Borrower.LastName</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Item Requested:</div>
+                                        <div class="value">@request.ItemLoaned.Title</div>
+                                    </li>
+                                    <li>
+                                        <a class="field btn btn-xs btn-primary mb-2" asp-route-id="@request.Id"
+                                        asp-page="./CreateLoan">Approve Request</a>
+                                        <form method="post" class="field">
+                                            <input asp-for="Input.Id" type="hidden" value="@request.Id"
+                                            aria-required="true" />
+                                            <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Deny
+                                                request</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-            }
-            <p class="mt-3 mb-0 w-25 fw-light fst-italic">My pending requests</p>
+                    <hr />
+                }
+            </div>
+            <a class="btn btn-primary mt-3 mb-0 w-25 fw-light fst-italic" data-bs-toggle="collapse" href="#Collapse2"
+                role="button" aria-expanded="false" aria-controls="Collapse2">My pending requests</a>
             <hr />
-            @foreach (var request in Model.PendingRequests)
-            {
-                <div class="Container bg-light bd-highlight my-4">
-                    <div class="row">
-                        <div class="col col-lg-8">
-                            <div class="m-b-10"><b>My Item</b></div>
-                            <img src="@request.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
-                        </div>
-                        <div class="col-md-4 hidden-xs hidden-sm">
-                            <ul class="profile-info-list">
-                                <li class="title">ITEM INFORMATION</li>
-                                <li>
-                                    <div class="field">Id:</div>
-                                    <div class="value">@request.Id</div>
-                                </li>
-                                <li>
-                                    <div class="field">Message:</div>
-                                    <div class="value">@request.Message</div>
-                                </li>
-                                <li>
-                                    <div class="field">Date Requested:</div>
-                                    <div class="value">@request.CreationTime</div>
-                                </li>
-                                <li>
-                                    <div class="field">Borrower Profile:</div>
-                                    <div class="value">
-                                        <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
-                                        asp-page="#../Users/UserProfile">@request.Owner.Email</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="field">Owner Name:</div>
-                                    <div class="value">@request.Owner.FirstName @request.Owner.LastName</div>
-                                </li>
-                                <li>
-                                    <div class="field">Item Requested:</div>
-                                    <div class="value">@request.ItemLoaned.Title</div>
-                                </li>
-                                <li>
-                                    <form method="post" class="field">
-                                        <input asp-for="Input.Id" type="hidden" value="@request.Id" aria-required="true" />
-                                        <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Delete request</button>
-                                    </form>
-                                </li>
-                            </ul>
+            <div class="collapse" id="Collapse2">
+                @foreach (var request in Model.PendingRequests)
+                {
+                    <div class="Container bg-white p-3 rounded-3 bd-highlight my-4">
+                        <div class="row">
+                            <div class="col col-lg-8">
+                                <div class="m-b-10"><b>My Item</b></div>
+                                <img src="@request.ItemLoaned.ItemPhotoPath" class="img-fluid mb-4 " alt="" />
+                            </div>
+                            <div class="col-md-4 hidden-xs hidden-sm">
+                                <ul class="profile-info-list">
+                                    <li class="title">ITEM INFORMATION</li>
+                                    <li>
+                                        <div class="field">Id:</div>
+                                        <div class="value">@request.Id</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Message:</div>
+                                        <div class="value">@request.Message</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Date Requested:</div>
+                                        <div class="value">@request.CreationTime</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Borrower Profile:</div>
+                                        <div class="value">
+                                            <a class="nav-item" asp-area="" asp-route-id="@request.Borrower.Id"
+                                            asp-page="#../Users/UserProfile">@request.Owner.Email</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Owner Name:</div>
+                                        <div class="value">@request.Owner.FirstName @request.Owner.LastName</div>
+                                    </li>
+                                    <li>
+                                        <div class="field">Item Requested:</div>
+                                        <div class="value">@request.ItemLoaned.Title</div>
+                                    </li>
+                                    <li>
+                                        <form method="post" class="field">
+                                            <input asp-for="Input.Id" type="hidden" value="@request.Id"
+                                            aria-required="true" />
+                                            <button type="submit" value="Deny request" class="btn btn-xs btn-danger">Delete
+                                                request</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-            }
+                    <hr />
+                }
+            </div>
         </div>
     </div>
 </div>
