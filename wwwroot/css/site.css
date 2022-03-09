@@ -2,14 +2,20 @@ html {
   font-size: 14px;
 }
 
-body, a {
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: .5px;
+body,
+a {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.5px;
   line-height: 1.7em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
   letter-spacing: 1.3px;
 }
 
@@ -21,13 +27,49 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .borderColor {
-  border-color:#F2F6FC;
+  border-color: #f2f6fc;
 }
-
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+  }
+}
+
+.bannerimg {
+  width: 100%;
+}
+
+.secondary-banner {
+  height: 300px;
+  object-fit: cover;
+}
+
+@media (min-width: 992px) {
+
+  .secondary-banner {
+    height: unset;
+    object-fit: unset;
+  }
+
+  .bannerimg {
+    width: auto;
+    height: 260px!important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bannerimg {
+    width: auto;
+    height: 310px!important;
+  }
+}
+
+@media (min-width: 1400px) {
+
+  .bannerimg {
+    width: auto;
+    height: 360px!important;
   }
 }
 
@@ -39,8 +81,8 @@ html {
 .img-preview {
   height: 200px;
   object-fit: cover;
-  max-width:185px;
-  max-height:200px;
+  max-width: 185px;
+  max-height: 200px;
 }
 
 .roundedcorners {
@@ -51,68 +93,68 @@ html {
   row-gap: 2em;
 }
 
-body{
+body {
   margin-bottom: 60px;
-  background-color:#f2f6fc;
-  color:#69707a;
-  }
-  .img-account-profile {
-      height: 10rem;
-  }
-  .rounded-circle {
-      border-radius: 50% !important;
-  }
-  .card {
-      box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-  }
-  .card .card-header {
-      font-weight: 500;
-  }
-  .card-header:first-child {
-      border-radius: 0.35rem 0.35rem 0 0;
-  }
-  .card-header {
-      padding: 1rem 1.35rem;
-      margin-bottom: 0;
-      background-color: rgba(33, 40, 50, 0.03);
-      border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-  }
-  .form-control, .dataTable-input {
-      display: block;
-      width: 100%;
-      padding: 0.875rem 1.125rem;
-      font-size: 0.875rem;
-      font-weight: 400;
-      line-height: 1;
-      color: #69707a;
-      background-color: #fff;
-      background-clip: padding-box;
-      border: 1px solid #c5ccd6;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border-radius: 0.35rem;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  .cover {
-    object-fit: cover;
-    width: 150px;
-    height: 150px;
-  }
-  .btn-primary {
-    color: #fff;
-    background-color: #652EE4;
-    border-color: #652EE4;
-  }
-  .btn:hover {
-    color: #fff;
-    background-color: #895ff0;
-    border-color: #895ff0;
-  }
-  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #652EE4;
-    border-color: #652EE4;
-  }
-  
-  
+  background-color: #f2f6fc;
+  color: #69707a;
+}
+.img-account-profile {
+  height: 10rem;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+.card {
+  box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+  font-weight: 500;
+}
+.card-header:first-child {
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+  padding: 1rem 1.35rem;
+  margin-bottom: 0;
+  background-color: rgba(33, 40, 50, 0.03);
+  border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control,
+.dataTable-input {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #69707a;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c5ccd6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.35rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.cover {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #652ee4;
+  border-color: #652ee4;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #895ff0;
+  border-color: #895ff0;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #652ee4;
+  border-color: #652ee4;
+}
