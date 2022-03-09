@@ -36,7 +36,7 @@
             else if (Model.CurrentItem.Owner.Id != SignInManager.UserManager.GetUserId(User))
             {
                 <form method="post">
-                    <h4>
+                    <h4 class="text-secondary">
                         <label asp-for="RequestMessage" class="control-label"></label>
                     </h4>
                     <span asp-validation-for="RequestMessage" class="text-danger"></span>
