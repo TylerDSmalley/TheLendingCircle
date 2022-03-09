@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_Review
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;

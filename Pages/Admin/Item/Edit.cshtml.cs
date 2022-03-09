@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_Item
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
 
     public class EditModel : PageModel
     {

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheLendingCircle.Pages_Admin_User
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly TheLendingCircle.Data.ApplicationDbContext _context;
