@@ -53,9 +53,9 @@ namespace TheLendingCircle.Pages.Items
         }
 
 
-        public JsonResult OnGetLoadMore(int itemCount, string query)
+        public JsonResult OnGetLoadMore(int itemCount, string searchQuery)
         {
-            SearchTerm = query;
+            SearchTerm = searchQuery;
             GetItems(itemCount);
             if (ItemsList.Count() < 1)
             {

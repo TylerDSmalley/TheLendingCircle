@@ -70,10 +70,6 @@
             data: {
                 ItemCount: itemCount,
                 SearchQuery
-            },
-            headers: {
-                RequestVerificationToken:
-                    $('input:hidden[name="__RequestVerificationToken"]').val()
             }
         })
             .done(function (result) {
