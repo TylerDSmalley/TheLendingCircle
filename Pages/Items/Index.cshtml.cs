@@ -120,7 +120,7 @@ namespace TheLendingCircle.Pages.Items
 
             MailMessage message = new MailMessage(from, to);
 
-            string mailbody = "Please login to respond to the following request:<br/><br/>" + RequestMessage;  
+            string mailbody = "Please <a href='http://thelendingcircle.us-east-1.elasticbeanstalk.com/Identity/Account/Login'>login</a> to respond to the following request:<br/><br/>" + RequestMessage;  
             message.Subject = "You have a new Lending Circle request!";  
             message.Body = mailbody;  
             message.IsBodyHtml = true;  
