@@ -31,8 +31,8 @@ namespace TheLendingCircle.Pages.MyCircle.MyItems
 
         private async Task LoadAsync(string id)
         {
-            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
             UserItems = await _context.Items.Where(i => i.Owner.Id == id).ToListAsync();
+            CircleRequests = await _context.Requests.Where(i => i.Owner.Id == CurrentUser.Id).ToListAsync();
             PendingLoans = await _context.Loans.Where(i => i.Borrower.Id == CurrentUser.Id && i.HasBeenViewed == false).Include(r => r.Owner).Include(r => r.Borrower).Include(r => r.ItemLoaned).ToListAsync();
         }
 

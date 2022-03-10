@@ -160,5 +160,24 @@ body {
     background-color: #FCFAFA ;
     color: #fff;
   }
+
+  .transform {
+    transition: transform 0.4s ease-in;
+  }
+  
+  .transform:hover {
+    transform: rotate(90deg);
+    fill: #fff;
+  }
+
+  .profileThumb {
+    transition: transform 0.4s ease-in;
+  }
+
+  .profileThumb:hover {
+    transform: scale(1.2, 1.2);
+    fill: #fff;
+  }
+  
   
   
